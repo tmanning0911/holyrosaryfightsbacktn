@@ -2,43 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bring Darren home — flyer</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=IBM+Plex+Mono:wght@400;600&family=Literata:opsz,wght@7..72,500&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Restore Principal Darren Mullis — flyer</title>
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; background: #cfc6b4; font-family: Literata, Georgia, serif; color: #1a1714; }
+    body { margin: 0; background: #cfc6b4; font-family: Georgia, "Times New Roman", serif; color: #1a1814; }
     .sheet {
       width: 8.5in;
+      max-width: 100%;
       min-height: 11in;
       margin: 18px auto;
-      background: #efe6d4;
-      padding: 0.38in 0.48in;
-      border: 1px solid #1a1714;
+      background: #f4f0e6;
+      padding: 0.4in 0.5in;
+      border: 1px solid #1a1814;
     }
     .top {
       display: flex;
       justify-content: space-between;
-      font-family: "IBM Plex Mono", monospace;
+      font-family: Arial, Helvetica, sans-serif;
       font-size: 10px;
       text-transform: uppercase;
+      letter-spacing: 0.06em;
       color: #5c564c;
-      border-bottom: 3px double #1a1714;
+      border-bottom: 3px solid #002269;
       padding-bottom: 8px;
     }
-    h1 { font-family: Fraunces, serif; font-size: 40px; line-height: 0.9; margin: 10px 0 8px; letter-spacing: -0.03em; }
-    h1 b { color: #1d3f8f; }
+    h1 {
+      font-family: "Arial Narrow", "Franklin Gothic Medium", Impact, sans-serif;
+      font-size: 42px;
+      line-height: 0.95;
+      margin: 12px 0 10px;
+      text-transform: uppercase;
+    }
+    h1 b { color: #002269; }
     .grid { display: grid; grid-template-columns: 2.1in 1fr; gap: 16px; }
-    img { width: 100%; display: block; border: 1px solid #1a1714; }
-    .cap { font-family: "IBM Plex Mono", monospace; font-size: 10px; margin-top: 6px; }
-    .yell { background: #8f1a18; color: #ffe08a; padding: 12px 14px; font-family: Fraunces, serif; font-weight: 800; font-size: 22px; line-height: 1.15; }
+    img { width: 100%; display: block; border: 1px solid #1a1814; }
+    .cap { font-family: Arial, Helvetica, sans-serif; font-size: 10px; margin-top: 6px; }
+    .yell {
+      background: #7a1414;
+      color: #f4f0e6;
+      padding: 12px 14px;
+      font-family: "Arial Narrow", Impact, sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
     ul, ol { margin: 8px 0 0; padding-left: 18px; }
     li { margin: 4px 0; }
-    h2 { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #1d3f8f; margin: 14px 0 6px; }
-    footer { margin-top: 14px; border-top: 1px solid #1a1714; padding-top: 8px; font-size: 10px; font-family: "IBM Plex Mono", monospace; color: #5c564c; }
-    .no-print { text-align: center; padding: 12px; font-family: "IBM Plex Mono", monospace; font-size: 13px; }
-    @media print { body { background: #fff; } .sheet { margin: 0; border: 0; } .no-print { display: none; } }
+    h2 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #002269;
+      margin: 14px 0 6px;
+    }
+    footer {
+      margin-top: 14px;
+      border-top: 1px solid #1a1814;
+      padding-top: 8px;
+      font-size: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #5c564c;
+    }
+    .no-print { text-align: center; padding: 12px; font-family: Arial, Helvetica, sans-serif; font-size: 13px; }
+    .no-print button,
+    .no-print a {
+      display: inline-block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 12px 18px;
+      margin: 0 6px 8px;
+      text-decoration: none;
+      border: 0;
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .no-print button { background: #002269; color: #ffc72a; }
+    .no-print a { background: transparent; color: #002269; border: 1px solid #002269; }
+    @media (max-width: 700px) {
+      body { background: #f4f0e6; }
+      .sheet {
+        width: auto;
+        min-height: 0;
+        margin: 0;
+        padding: 20px 16px 32px;
+        border: 0;
+      }
+      .grid { grid-template-columns: 1fr; }
+      .top { flex-wrap: wrap; gap: 6px; }
+      h1 { font-size: 28px; }
+      .yell { font-size: 16px; }
+      .no-print button,
+      .no-print a {
+        display: block;
+        width: calc(100% - 24px);
+        margin: 0 12px 10px;
+        text-align: center;
+      }
+    }
+    @media print { body { background: #fff; } .sheet { margin: 0; border: 0; width: 8.5in; } .no-print { display: none; } }
   </style>
 </head>
 <body>
@@ -47,31 +112,31 @@
     <div class="top">
       <span>Holy Rosary · East Memphis</span>
       <span>August 2026</span>
-      <span>Families &amp; alumni</span>
+      <span>The Christian faithful</span>
     </div>
-    <h1>Bring <b>Darren Mullis</b> home</h1>
+    <h1>Restore <b>Darren Mullis</b></h1>
     <div class="grid">
       <div>
         <img src="img/fr-james-clark.png" alt="Fr. James Clark" />
-        <p class="cap">Fr. James Clark. Pastor since April. Still the chancellor. Four months later Darren was gone.</p>
+        <p class="cap">The Very Rev. James M. Clark, J.C.D. Pastor since April, remaining chancellor and judicial vicar. Four months later the principal was gone. We name the offices. We do not invent a decree.</p>
       </div>
       <div>
-        <div class="yell">Sign the petition.<br />Stop the tithing.<br />Stop attending.<br />Find a parish where the priest knows his community.</div>
+        <div class="yell">Sign: c.org/QLChJDQdbz<br />Keep Sunday Mass. Not in this parish.<br />Remain in communion with Rome.</div>
         <h2>What happened</h2>
         <ul>
           <li>Darren: principal since 2003. Holy Rosary since he was two.</li>
-          <li>Aug 19 letter: he’s out. No reason.</li>
-          <li>Aug 21: they said “confidential.” Families went to the Catholic Center anyway.</li>
+          <li>19 August letter: he will be departing. No cause given.</li>
+          <li>21 August: Holy Rosary Parish and Catholic Schools of Memphis called it confidential. The faithful went to the Catholic Center.</li>
         </ul>
-        <h2>Until he’s back</h2>
+        <h2>Until he is restored</h2>
         <ol>
-          <li>No envelope. Not one dollar.</li>
-          <li>Do not sit in those pews. Go to Mass somewhere else.</li>
-          <li>Call Clark 901-767-6949 · Bishop Talley 901-373-1200 · Fay 901-373-1221</li>
+          <li>Hear Mass. Do not omit it. Hear it at another Catholic parish.</li>
+          <li>Direct the offering there. Request any capital gift returned if you so choose.</li>
+          <li>Call the pastor 901-767-6949 · the bishop 901-373-1200 · Dr. Fay 901-373-1221</li>
         </ol>
       </div>
     </div>
-    <footer>holyrosaryfightsbacktn.com · Photo from the parish staff page. Not the parish office.</footer>
+    <footer>holyrosaryfightsbacktn.com · The Christian faithful, in their own name. Not the parish. Not the diocese. Not the Holy See.</footer>
   </article>
 </body>
 </html>

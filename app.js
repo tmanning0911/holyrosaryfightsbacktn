@@ -1,7 +1,17 @@
 /* Petition + letter */
 const SITE = "https://holyrosaryfightsbacktn.com";
+const PETITION_URL = "https://c.org/QLChJDQdbz";
 const PETITION_ENDPOINT = "";
 const KEY = "hrfb_petition";
+
+const SEED = [];
+
+function mergeList(list) {
+  const extra = Array.isArray(list) ? list : loadLocal();
+  const taken = new Set(SEED.map((s) => s.name.trim().toLowerCase()));
+  const rest = extra.filter((r) => !taken.has((r.name || "").trim().toLowerCase()));
+  return SEED.concat(rest);
+}
 
 const TO = [
   "hrpastor@holyrosarymemphis.org",
@@ -12,17 +22,24 @@ const TO = [
   "rick.ouellette@cc.cdom.org",
 ].join(",");
 
-const LETTER_BODY = (name, role) => `Father Clark, Bishop Talley, Dr. Fay, Mr. Antoine:
+const LETTER_BODY = (name, role) => `The Very Reverend James M. Clark, J.C.D.
+The Most Reverend David P. Talley
+Dr. Chris Fay
+Mr. Pierre Nic Antoine
 
-I am a ${role}. Put Darren Mullis back as principal of Holy Rosary.
+I am a ${role} writing in my own name, in communion with the Holy Father and with the Bishop of Memphis.
 
-He has been ours since he was a little boy. Principal since 2003. On August 19 you sent a letter with no reason. On August 21 you hid behind “confidential.” That is not good enough.
+I respectfully request that Darren Mullis be restored as principal of Holy Rosary Catholic School.
 
-Father Clark has been pastor four months and still works downtown as chancellor. He does not know this community. Darren does.
+He has belonged to this parish from childhood and has served as principal since 2003. On 19 August a letter announced his “departure” without a public cause. On 21 August Holy Rosary Parish and Catholic Schools of Memphis called the matter confidential. Confidentiality may protect a man’s good name (can. 220). It does not relieve a pastor of the duty to care for the flock.
 
-Until Darren is back I am done tithing here and done attending here. I will take my family to a parish where the priest knows the people.
+Father Clark has been pastor four months and retains the offices of chancellor and judicial vicar. We honor those offices. We ask that the man who knows this community be returned to the hallway.
 
-Bring him home.
+Until that is done I will fulfill the Sunday obligation (can. 1247) at another Catholic parish, and I will direct my free-will offerings there. I do not omit Mass. I do not leave the Church.
+
+The petition of the faithful: https://c.org/QLChJDQdbz
+
+Respectfully in Christ,
 
 ${name}
 ${role}`;
@@ -41,18 +58,17 @@ function saveLocal(list) {
 
 function renderWall(list) {
   const wall = document.getElementById("wall");
-  const count = document.getElementById("signCount");
-  if (count) count.textContent = String(list.length);
+  const combined = mergeList(list);
   if (!wall) return;
   wall.innerHTML = "";
-  if (!list.length) {
+  const show = combined.slice().reverse();
+  if (!show.length) {
     const li = document.createElement("li");
     li.className = "empty";
-    li.textContent = "Line 1 is empty. That’s you.";
+    li.textContent = "No names on this sheet yet.";
     wall.appendChild(li);
     return;
   }
-  const show = list.slice().reverse();
   show.forEach((row) => {
     const li = document.createElement("li");
     const note = row.note ? ` — ${row.note}` : "";
@@ -71,7 +87,7 @@ function escapeHtml(s) {
 
 function alreadySigned(name) {
   const n = name.trim().toLowerCase();
-  return loadLocal().some((r) => (r.name || "").trim().toLowerCase() === n);
+  return mergeList().some((r) => (r.name || "").trim().toLowerCase() === n);
 }
 
 async function pullRemote() {
@@ -139,9 +155,7 @@ document.getElementById("petitionForm")?.addEventListener("submit", async (e) =>
   e.target.reset();
   document.getElementById("pOk").checked = false;
   msg.className = "msg ok";
-  msg.textContent = PETITION_ENDPOINT
-    ? `You’re on the sheet. ${list.length} name${list.length === 1 ? "" : "s"}. Text this page to five Rams.`
-    : `You’re on this computer’s sheet (${list.length}). Hook the Google Sheet in app.js so names from every phone land in one place.`;
+  msg.textContent = `Your name is with the petition. Share this page with the faithful who know this school.`;
   btn.disabled = false;
 });
 
@@ -161,7 +175,7 @@ document.getElementById("fromRole")?.addEventListener("change", refreshLetter);
 refreshLetter();
 
 document.getElementById("sendEmail")?.addEventListener("click", () => {
-  const subject = encodeURIComponent("Put Darren Mullis back — signed the petition");
+  const subject = encodeURIComponent("Respectful petition: restoration of Principal Darren Mullis");
   window.location.href = `mailto:${TO}?subject=${subject}&body=${encodeURIComponent(letterText())}`;
 });
 
@@ -175,11 +189,35 @@ document.getElementById("copyLetter")?.addEventListener("click", async () => {
   }
 });
 
+const CAPITAL_TO = [
+  "hrpastor@holyrosarymemphis.org",
+  "churchoffice@holyrosarymemphis.org",
+].join(",");
+
+function capitalText() {
+  return (document.getElementById("capitalPreview")?.innerText || "").trim();
+}
+
+document.getElementById("sendCapital")?.addEventListener("click", () => {
+  const subject = encodeURIComponent("Request to return my Holy Rosary capital improvement gift");
+  window.location.href = `mailto:${CAPITAL_TO}?subject=${subject}&body=${encodeURIComponent(capitalText())}`;
+});
+
+document.getElementById("copyCapital")?.addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(capitalText());
+    document.getElementById("copyCapital").textContent = "Copied";
+    setTimeout(() => (document.getElementById("copyCapital").textContent = "Copy it"), 1600);
+  } catch {
+    prompt("Copy:", capitalText());
+  }
+});
+
 document.getElementById("shareBtn")?.addEventListener("click", async () => {
   const data = {
-    title: "Put Darren Mullis back",
-    text: "Sign the petition. Stop tithing. Stop attending Holy Rosary until they bring Darren home.",
-    url: SITE + "/#petition",
+    title: "Petition to restore Principal Darren Mullis",
+    text: "The faithful of Holy Rosary are petitioning to restore Principal Darren Mullis. Sign: ",
+    url: PETITION_URL,
   };
   if (navigator.share) {
     try { await navigator.share(data); } catch { /* cancelled */ }
@@ -194,7 +232,38 @@ const navLinks = document.getElementById("navLinks");
 menuBtn?.addEventListener("click", () => {
   const open = navLinks.classList.toggle("open");
   menuBtn.setAttribute("aria-expanded", String(open));
+  menuBtn.textContent = open ? "Close" : "Menu";
 });
+navLinks?.querySelectorAll("a").forEach((a) => {
+  a.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuBtn?.setAttribute("aria-expanded", "false");
+    if (menuBtn) menuBtn.textContent = "Menu";
+  });
+});
+
+const flip = document.getElementById("flip");
+if (flip && !sessionStorage.getItem("hrfb_flip_v2")) {
+  const seen = () => sessionStorage.setItem("hrfb_flip_v2", "1");
+  const shut = () => {
+    flip.close();
+    seen();
+  };
+  const open = () => {
+    if (typeof flip.showModal === "function") flip.showModal();
+  };
+  const quiet = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const start = () => (quiet ? open() : setTimeout(open, 650));
+  if (document.readyState === "complete") start();
+  else window.addEventListener("load", start);
+  document.getElementById("flipClose")?.addEventListener("click", shut);
+  document.getElementById("flipSkip")?.addEventListener("click", shut);
+  document.getElementById("flipSign")?.addEventListener("click", seen);
+  flip.addEventListener("cancel", seen);
+  flip.addEventListener("click", (e) => {
+    if (e.target === flip) shut();
+  });
+}
 
 pullRemote().then(renderWall);
 renderWall(loadLocal());

@@ -17,7 +17,19 @@ Official spelling: **Darren Mullis** (not Dairn). School colors: **blue and gold
 | Aug 19, 2026 | Letter to parents: Mullis “will be departing from Holy Rosary School as our principal”; wished well; “opportunity to continue to serve in the Catholic Schools of Memphis.” Parents posted the letter on social media. Paper notes the letter did **not** say “dismissal”; parents used that word. | [Commercial Appeal, Aug 21, 2026](https://www.commercialappeal.com/story/news/education/2026/08/21/holy-rosary-memphis-principal-leaving/91404729007/) |
 | Aug 21, 2026 | Joint statement, **Holy Rosary Parish and Catholic Schools of Memphis**: “confidential personnel matter that we are not able to discuss.” Petition for reinstatement (hundreds of signatures per Daily Memphian). **Rhiannon Thomas** (1st grade teacher; former principal, Incarnation, Collierville) named interim for the rest of the year. Protest at the Catholic Diocese of Memphis. | CA; [Daily Memphian](https://dailymemphian.com/article/65892/holy-rosary-principal-exit-families-protest-catholic-diocese) (Brandon LaGrone II; photo Mark Weber) |
 
-We **do not have** (as of this briefing): the petition URL, a named author of the Aug 19 letter, a diocesan decree, Mullis’s own public statement, or a newsroom that says “Fr. Clark fired him.”
+We **do not have** (as of this briefing): a named author of the Aug 19 letter, a diocesan decree, Mullis’s own public statement, or a newsroom that says “Fr. Clark fired him.”
+
+**Petition:** [Change.org — Reinstate Darren Mullis](https://c.org/QLChJDQdbz) (started Aug 22, 2026, Ryan Taylor).
+
+**Aug 19 letter — only sentences the Commercial Appeal printed** (parents posted the letter; CA did not print a signature):
+
+> Darren Mullis will be departing from Holy Rosary School as our principal, and we wish him the very best moving forward. He has an opportunity to continue to serve in the Catholic Schools of Memphis, and we hope that he will pursue that opportunity as his service to our school has been greatly appreciated.
+
+**Aug 21 joint statement — Holy Rosary Parish and Catholic Schools of Memphis** (full grafs as printed):
+
+> We understand that people may have questions, but Darren Mullis’s departure from Holy Rosary is a confidential personnel matter that we are not able to discuss. We respect Darren’s privacy, continue to wish him and his family well, and keep them in our prayers. At the same time, we remain focused on supporting the Holy Rosary community and providing stability and continuity for our students and families as we move forward together in faith.
+
+**Parish-school principal policy (CDOM Catholic Schools Policy Handbook, May 2018, §207):** a parish-school principal “shall be notified in writing, by the pastor, of non-renewal of contract.” Superintendent is also notified. “All terminations must first be reviewed by diocesan legal counsel through the Human Resource Director.” HR Director as of 2025–26: **Colleen Goodspeed**, 901-373-1257, colleen.goodspeed@cc.cdom.org.
 
 ---
 
@@ -26,6 +38,7 @@ We **do not have** (as of this briefing): the petition URL, a named author of th
 Do not treat this list as a rap sheet. Treat it as the **chain of keys**.
 
 ### Very Rev. James M. Clark, J.C.D., Ph.D., J.V.
+- Full public dossier: **`CLARK-ARCHIVE.md`** (ordination 2011, chancellor 2018, pastor Apr 24, 2026, dissertation, boards, gaps).
 - **New pastor** of Holy Rosary (Apr 24, 2026).
 - Still **Chancellor** (curial archive, decrees, many canonical administrative matters) and **Judicial Vicar** (tribunal).
 - Parish: 4851 Park Avenue, Memphis, TN 38117 · 901-767-6949 · churchoffice@holyrosarymemphis.org
@@ -37,7 +50,11 @@ Do not treat this list as a rap sheet. Treat it as the **chain of keys**.
 - President / CEO, Catholic Schools of Memphis (interim from June 2024; later styled President).
 - Co-voice of the Aug 21 joint statement.
 - Public: chris.fay@cc.cdom.org · 901-373-1221
-- Longtime Catholic-schools figure; has coached sports at Holy Rosary (diocese magazine bio). That is context, not a smear.
+- Longtime Catholic-schools figure; CBHS assistant principal then principal (first non-Brother to lead CBHS; Daily Memphian, Mar 5, 2020: leaving at end of term).
+- Diocese *Faith* magazine (Oct 2024): wife **Rena**; six children (do not name them on the campaign site); coached baseball, basketball, and soccer at Holy Rosary; also taught/coached at SBA.
+- **Rena Fay**: Enrollment Coordinator, Holy Rosary Catholic School (staff directory + financial-aid page). rena.fay@holyrosarymemphis.org · 901-685-1231. Prior HR roles on LinkedIn: preschool/kindergarten assistant, development coordinator. **Do not target her or the children.** The public point is the family sitting on both sides of the desk.
+- Site line: we can only **allege** he had a part in Mullis’s removal. No newsroom has assigned the decision to him.
+- **Not found (do not invent):** a published misconduct file; his mother’s name or workplace; proof the children were enrolled at Holy Rosary by name (coaching at HR + “Catholic schools” is the sourced frame).
 
 ### Pierre Nic Antoine
 - Superintendent of Catholic Schools · nic.antoine@cc.cdom.org · 901-373-1219
@@ -98,7 +115,7 @@ Poplar / I-240 / East Memphis / Shelby Oaks approaches first. Keep type huge. Bl
 
 ## Still needed from the campaign (not invented here)
 
-1. Live petition URL → paste into `app.js` as `PETITION_URL`
+1. Live petition: https://c.org/QLChJDQdbz (Change.org — Ryan Taylor)
 2. Campaign inbox → `CAMPAIGN_EMAIL` (then Formspree/Netlify Forms)
 3. Domain: **holyrosaryfightsback.com** (also grab bringmullishome.com if you can)
 4. Permissioned photos of the Aug 21 protest (Daily Memphian photos are copyrighted — don’t scrape them)

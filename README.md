@@ -4,20 +4,19 @@ Live: **https://holyrosaryfightsbacktn.com**
 
 Independent site for families and alumni. Not the parish office.
 
-## Domain DNS (do this at whoever sold you the domain)
+## Hosting
 
-Point the domain at GitHub Pages:
+Live on Netlify (DNS + site). Domain was registered through Netlify.
 
-**A records** (apex `holyrosaryfightsbacktn.com`):
+- Production: https://holyrosaryfightsbacktn.com
+- Netlify subdomain: https://holyrosaryfightsbacktn.netlify.app
+- Dashboard: https://app.netlify.com/projects/holyrosaryfightsbacktn
 
-- `185.199.108.153`
-- `185.199.109.153`
-- `185.199.110.153`
-- `185.199.111.153`
+Redeploy from this folder:
 
-**CNAME** for `www`: `tmanning0911.github.io`
-
-Then in GitHub: repo Settings → Pages → Custom domain `holyrosaryfightsbacktn.com` → check Enforce HTTPS once it turns green.
+```bash
+npx netlify-cli@17 deploy --prod --dir . --site bbfc1fd9-c17a-4b7f-bdbe-813869b9be85
+```
 
 ## Petition names on every phone
 
