@@ -31,44 +31,48 @@
 <body>
   <a class="skip" href="#petition">Skip to petition</a>
 
-  <header class="gym">
-    <div class="where">Park Ave · East Memphis · Rams</div>
-    <h1>Bring Darren Mullis home</h1>
-    <div class="score">Signed<br /><b id="signCount">0</b> / 1000</div>
+  <header class="bar">
+    <strong><a href="#top">Holy Rosary Fights Back · TN</a></strong>
+    <button class="menu-btn" id="menuBtn" type="button">Menu</button>
+    <nav id="navLinks">
+      <a href="#petition">Sign</a>
+      <a href="#story">What happened</a>
+      <a href="#phones">Call</a>
+      <a href="#faq">FAQ</a>
+      <a href="one-pager.html">Print</a>
+    </nav>
+    <div class="score"><b id="signCount">0</b> signed</div>
   </header>
-  <button class="menu-btn" id="menuBtn" type="button">Menu</button>
-  <nav class="links" id="navLinks">
-    <a href="#petition">Sign</a>
-    <a href="#priest">The new priest</a>
-    <a href="#story">What happened</a>
-    <a href="#phones">Call</a>
-    <a href="#faq">Search</a>
-    <a href="one-pager.html">Print</a>
-  </nav>
 
-  <p class="hook">They dumped <strong>Holy Rosary Catholic School</strong> principal <strong>Darren Mullis</strong> on August 19, 2026 in East Memphis after 23 years and wouldn’t say why. Put your name on the petition.</p>
-  <p class="hook" style="font-size:16px;margin-top:0">
-    <a href="https://holyrosaryfightsbacktn.com/">holyrosaryfightsbacktn.com</a>
-    ·
-    <a href="sms:&amp;body=Sign%20this%20and%20send%20it%20on%20https://holyrosaryfightsbacktn.com/">Text it</a>
-    ·
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fholyrosaryfightsbacktn.com%2F" target="_blank" rel="noopener">Facebook</a>
-  </p>
+  <section class="hero" id="top">
+    <div class="hero-photo">
+      <img src="img/fr-james-clark.png" alt="Father James Clark, new pastor of Holy Rosary Catholic Church Memphis and chancellor of the Catholic Diocese of Memphis" width="641" height="800" />
+      <p class="badge">Fr. James Clark · pastor since April 2026</p>
+    </div>
+    <div class="hero-copy">
+      <p class="k">East Memphis · Holy Rosary Rams · August 2026</p>
+      <h1>They took<br />our principal.</h1>
+      <p class="deck">
+        <strong>Darren Mullis</strong> ran Holy Rosary Catholic School for 23 years. On August 19 they sent a letter. No reason. This is the new priest. Sign the petition. Then leave the envelope at home.
+      </p>
+      <a class="go" href="#petition">Sign the petition</a>
+    </div>
+  </section>
 
-  <div class="board-wrap">
-    <div class="clipboard" id="petition">
-      <div class="metal" aria-hidden="true"></div>
-      <div class="sheet">
-        <h2>Petition to Bishop Talley, Fr. James Clark, and Catholic Schools of Memphis</h2>
-        <p class="ask">
-          We ask you to put <strong>Darren Mullis</strong> back as principal of Holy Rosary Catholic School. He has belonged to this parish since he was two. He has been principal since 2003. A new pastor who does not know this community does not get to erase that. Until you bring him home we will not tithe here and we will not attend here. We will take our families to a parish where the priest knows the people.
-        </p>
-
-        <form class="fields" id="petitionForm" name="petition" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-          <input type="hidden" name="form-name" value="petition" />
-          <p style="display:none"><label>Don’t fill this <input name="bot-field" /></label></p>
+  <div class="split">
+    <section class="sign" id="petition">
+      <h2>The petition</h2>
+      <p class="ask">
+        Put <strong>Darren Mullis</strong> back as principal of Holy Rosary Catholic School, 4841 Park Avenue, Memphis. Until you do, we will not tithe here and we will not attend here. We will take our families to a parish where the priest knows the people.
+      </p>
+      <form class="fields" id="petitionForm" name="petition" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="petition" />
+        <p style="display:none"><label>Don’t fill this <input name="bot-field" /></label></p>
+        <div>
           <label for="pName">Signature (legal name)</label>
           <input id="pName" name="name" autocomplete="name" required />
+        </div>
+        <div>
           <label for="pRole">I am a</label>
           <select id="pRole" name="role">
             <option>Current parent</option>
@@ -78,110 +82,112 @@
             <option>Teacher / staff (on my own time)</option>
             <option>Neighbor / friend of the school</option>
           </select>
+        </div>
+        <div>
           <label for="pNote">One line if you want (optional)</label>
           <input id="pNote" name="note" maxlength="140" placeholder="He taught my kids. Bring him back." />
-          <label class="check">
-            <input id="pOk" type="checkbox" required />
-            <span>Show my name on this list and send it to the bishop, the pastor, and Catholic Schools of Memphis.</span>
-          </label>
-          <button class="sign-btn" type="submit">Sign this paper</button>
-          <p class="msg" id="pMsg"></p>
-        </form>
+        </div>
+        <label class="check">
+          <input id="pOk" type="checkbox" required />
+          <span>Show my name on this list and send it to the bishop, the pastor, and Catholic Schools of Memphis.</span>
+        </label>
+        <button class="sign-btn" type="submit">Sign this paper</button>
+        <p class="msg" id="pMsg"></p>
+      </form>
+      <p class="wall-title">Names</p>
+      <ol class="wall" id="wall"></ol>
+    </section>
 
-        <p class="wall-title">Names on the sheet</p>
-        <ol class="wall" id="wall"></ol>
-      </div>
-    </div>
-
-    <aside class="side" id="priest">
-      <span class="tape" aria-hidden="true"></span>
-      <div class="polaroid">
-        <img src="img/fr-james-clark.png" alt="Father James Clark, new pastor of Holy Rosary Catholic Church Memphis and chancellor of the Catholic Diocese of Memphis" width="641" height="800" />
-        <p>Fr. James Clark. Pastor since April. Still the chancellor downtown. Four months later Darren was gone.</p>
-      </div>
-      <span class="tape r" aria-hidden="true"></span>
-      <div class="boycott">
-        <strong>Stop the tithing.<br />Stop attending.<br />Find a new parish.</strong>
-        <p>One where the priest knows his community. Go to Mass. Just not here until Darren is back in that hallway.</p>
-      </div>
+    <aside class="boycott" id="priest">
+      <strong>Stop the tithing.<br />Stop attending.<br />Find a new parish.</strong>
+      <p>One where the priest knows his community. Go to Mass. Just not here until Darren is back in that hallway.</p>
     </aside>
   </div>
 
-  <section class="story" id="story">
-    <h3>What happened</h3>
-    <p>Aug 19: a letter. Darren is “departing.” No reason. He’s been principal since 2003. Two days later the parish and Catholic Schools of Memphis told the Commercial Appeal it was confidential. Families were already standing at the Catholic Center. The Daily Memphian put the protest on the front of the metro section.</p>
-    <p>He grew up here. Ram through eighth. CBHS ’86. Came home, taught, ran youth and religion, then they made him principal. Betty Ann. Their kids. The man in the hallway. Learning Lab, Quest, ANGEL, The Learning Center — those are rooms with children in them.</p>
-    <p>April 24: Fr. Clark takes the parish and keeps chancellor and judicial vicar. August 19: Darren is out. That’s the whole story.</p>
-    <details>
-      <summary>Dates, if you need them</summary>
-      <p>2003 — principal. 2024 — bishop put Darren on the committee that helped create the Catholic Schools office that’s now saying “nothing to discuss.” April 24, 2026 — Clark in, Fr. Poulose out as pastor. Aug 19 — the letter. Aug 21 — “confidential,” protest at 5825 Shelby Oaks, hundreds on a paper petition, a first-grade teacher named interim. Leave her alone. Bring Darren back.</p>
-    </details>
-  </section>
+  <main class="wrap">
+    <section id="story">
+      <h2>What happened</h2>
+      <p>Aug 19: a letter. Darren is “departing.” No reason. He’s been principal since 2003. Two days later the parish and Catholic Schools of Memphis told the Commercial Appeal it was confidential. Families were already standing at the Catholic Center. The Daily Memphian put the protest in metro.</p>
+      <p>He grew up here. Ram through eighth. CBHS ’86. Came home, taught, ran youth and religion, then they made him principal. Betty Ann. Their kids. The man in the hallway. Learning Lab, Quest, ANGEL, The Learning Center — those are rooms with children in them.</p>
+      <p>April 24: Fr. Clark takes the parish and keeps chancellor and judicial vicar. August 19: Darren is out. That’s the whole story.</p>
+      <p class="share">
+        <a href="https://holyrosaryfightsbacktn.com/">holyrosaryfightsbacktn.com</a>
+        ·
+        <a href="sms:&amp;body=Sign%20this%20and%20send%20it%20on%20https://holyrosaryfightsbacktn.com/">Text it</a>
+        ·
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fholyrosaryfightsbacktn.com%2F" target="_blank" rel="noopener">Facebook</a>
+      </p>
+      <details>
+        <summary>Dates</summary>
+        <p>2003 — principal. 2024 — bishop put Darren on the committee that helped create the Catholic Schools office that’s now saying “nothing to discuss.” April 24, 2026 — Clark in, Fr. Poulose out as pastor. Aug 19 — the letter. Aug 21 — “confidential,” protest at 5825 Shelby Oaks, hundreds on a paper petition, a first-grade teacher named interim. Leave her alone. Bring Darren back.</p>
+      </details>
+    </section>
 
-  <section class="phones" id="phones">
-    <h3>Call them</h3>
-    <ul class="phone-list">
-      <li>Fr. James Clark, pastor / chancellor <span>901-767-6949 · hrpastor@holyrosarymemphis.org</span></li>
-      <li>Bishop David Talley <span>5825 Shelby Oaks · 901-373-1200</span></li>
-      <li>Dr. Chris Fay, Catholic Schools <span>901-373-1221 · chris.fay@cc.cdom.org</span></li>
-      <li>Nic Antoine, superintendent <span>901-373-1219 · nic.antoine@cc.cdom.org</span></li>
-    </ul>
-  </section>
+    <section id="phones">
+      <h2>Call them</h2>
+      <ul class="phone-list">
+        <li>Fr. James Clark, pastor / chancellor <span>901-767-6949 · hrpastor@holyrosarymemphis.org</span></li>
+        <li>Bishop David Talley <span>5825 Shelby Oaks · 901-373-1200</span></li>
+        <li>Dr. Chris Fay, Catholic Schools <span>901-373-1221 · chris.fay@cc.cdom.org</span></li>
+        <li>Nic Antoine, superintendent <span>901-373-1219 · nic.antoine@cc.cdom.org</span></li>
+      </ul>
+    </section>
 
-  <section class="write" id="write">
-    <h3>Or send the letter</h3>
-    <div class="pair">
-      <div>
-        <label for="fromName">Your name</label>
-        <input id="fromName" autocomplete="name" />
+    <section class="write" id="write">
+      <h2>Or send the letter</h2>
+      <div class="pair">
+        <div>
+          <label for="fromName">Your name</label>
+          <input id="fromName" autocomplete="name" />
+        </div>
+        <div>
+          <label for="fromRole">I am a</label>
+          <select id="fromRole">
+            <option>Current parent</option>
+            <option>Alum</option>
+            <option>Grandparent</option>
+            <option>Parishioner</option>
+            <option>Teacher / staff (on my own time)</option>
+            <option>Neighbor</option>
+          </select>
+        </div>
       </div>
-      <div>
-        <label for="fromRole">I am a</label>
-        <select id="fromRole">
-          <option>Current parent</option>
-          <option>Alum</option>
-          <option>Grandparent</option>
-          <option>Parishioner</option>
-          <option>Teacher / staff (on my own time)</option>
-          <option>Neighbor</option>
-        </select>
+      <div class="letter" id="letterPreview"></div>
+      <div class="row">
+        <button class="sign-btn" type="button" id="sendEmail">Open in mail</button>
+        <button class="ghost" type="button" id="copyLetter">Copy it</button>
+        <button class="ghost" type="button" id="shareBtn">Share</button>
+        <a class="ghost" href="one-pager.html">Print</a>
       </div>
-    </div>
-    <div class="letter" id="letterPreview"></div>
-    <div class="row">
-      <button class="sign-btn" type="button" id="sendEmail">Open in mail</button>
-      <button class="ghost" type="button" id="copyLetter">Copy it</button>
-      <button class="ghost" type="button" id="shareBtn">Share the petition</button>
-      <a class="ghost" href="one-pager.html">Print a flyer</a>
-    </div>
-  </section>
+    </section>
 
-  <section class="press">
-    <h3>In the paper</h3>
-    <a href="https://www.commercialappeal.com/story/news/education/2026/08/21/holy-rosary-memphis-principal-leaving/91404729007/" target="_blank" rel="noopener">
-      <em>Commercial Appeal · Aug 21</em> — Holy Rosary Memphis principal Darren Mullis leaving. Jack Armstrong on the letter and the “confidential” line.
-    </a>
-    <a href="https://dailymemphian.com/article/65892/holy-rosary-principal-exit-families-protest-catholic-diocese" target="_blank" rel="noopener">
-      <em>Daily Memphian · Aug 21</em> — Catholic Diocese of Memphis protest after Holy Rosary principal’s abrupt exit. Families at 5825 Shelby Oaks Drive.
-    </a>
-  </section>
+    <section class="press">
+      <h2>In the paper</h2>
+      <a href="https://www.commercialappeal.com/story/news/education/2026/08/21/holy-rosary-memphis-principal-leaving/91404729007/" target="_blank" rel="noopener">
+        <em>Commercial Appeal · Aug 21</em> — Holy Rosary Memphis principal Darren Mullis leaving. Jack Armstrong on the letter and the “confidential” line.
+      </a>
+      <a href="https://dailymemphian.com/article/65892/holy-rosary-principal-exit-families-protest-catholic-diocese" target="_blank" rel="noopener">
+        <em>Daily Memphian · Aug 21</em> — Catholic Diocese of Memphis protest after Holy Rosary principal’s abrupt exit. Families at 5825 Shelby Oaks Drive.
+      </a>
+    </section>
 
-  <section class="faq" id="faq">
-    <h2>If you searched for this</h2>
-    <dl>
-      <dt>Why was Darren Mullis fired from Holy Rosary?</dt>
-      <dd>The school and Catholic Schools of Memphis will not say. The August 19 letter called it a departure. Families call it a firing. Principal of Holy Rosary Catholic School in Memphis since 2003.</dd>
-      <dt>Who is the new priest at Holy Rosary Memphis?</dt>
-      <dd>Very Rev. James M. Clark, J.C.D. Pastor since April 24, 2026. He is also chancellor and judicial vicar of the Catholic Diocese of Memphis. Four months later Darren Mullis was gone.</dd>
-      <dt>Where is Holy Rosary Catholic School?</dt>
-      <dd>4841 Park Avenue, Memphis, TN 38117. East Memphis. Home of the Rams. Parish next door at 4851 Park.</dd>
-      <dt>How do I sign the Darren Mullis petition?</dt>
-      <dd>On this page. holyrosaryfightsbacktn.com. Name, who you are, checkbox. Then text it to every Ram.</dd>
-    </dl>
-    <p class="keys">Darren Mullis Holy Rosary · Holy Rosary principal fired Memphis · Holy Rosary Fights Back Tennessee · reinstate Darren Mullis · Fr James Clark Holy Rosary pastor · Bishop David Talley · Catholic Diocese of Memphis · East Memphis Catholic school · Holy Rosary Rams Park Avenue</p>
-  </section>
+    <section class="faq" id="faq">
+      <h2>If you searched for this</h2>
+      <dl>
+        <dt>Why was Darren Mullis fired from Holy Rosary?</dt>
+        <dd>The school and Catholic Schools of Memphis will not say. The August 19 letter called it a departure. Families call it a firing. Principal of Holy Rosary Catholic School in Memphis since 2003.</dd>
+        <dt>Who is the new priest at Holy Rosary Memphis?</dt>
+        <dd>Very Rev. James M. Clark, J.C.D. Pastor since April 24, 2026. He is also chancellor and judicial vicar of the Catholic Diocese of Memphis. Four months later Darren Mullis was gone.</dd>
+        <dt>Where is Holy Rosary Catholic School?</dt>
+        <dd>4841 Park Avenue, Memphis, TN 38117. East Memphis. Home of the Rams. Parish next door at 4851 Park.</dd>
+        <dt>How do I sign the Darren Mullis petition?</dt>
+        <dd>On this page. holyrosaryfightsbacktn.com. Name, who you are, checkbox. Then text it to every Ram.</dd>
+      </dl>
+      <p class="keys">Darren Mullis Holy Rosary · Holy Rosary principal fired Memphis · Holy Rosary Fights Back Tennessee · reinstate Darren Mullis · Fr James Clark Holy Rosary pastor · Bishop David Talley · Catholic Diocese of Memphis · East Memphis Catholic school · Holy Rosary Rams Park Avenue</p>
+    </section>
+  </main>
 
-  <footer>
+  <footer class="site">
     <p><strong>Holy Rosary Fights Back TN</strong> — independent petition by families and alumni of Holy Rosary Catholic School, 4841 Park Avenue, Memphis, Tennessee 38117. Not the parish, not the Catholic Diocese of Memphis. Live at <a href="https://holyrosaryfightsbacktn.com/">holyrosaryfightsbacktn.com</a>.</p>
   </footer>
 

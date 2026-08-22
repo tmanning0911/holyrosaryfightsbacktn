@@ -5,32 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Sign the Darren Mullis Petition | Holy Rosary Memphis Principal</title>
   <meta name="description" content="Sign the petition to reinstate Darren Mullis as principal of Holy Rosary Catholic School, East Memphis. Holy Rosary Fights Back Tennessee." />
-  <meta name="keywords" content="Darren Mullis petition, sign Darren Mullis petition, Holy Rosary Memphis principal, reinstate Darren Mullis, Holy Rosary Fights Back" />
   <link rel="canonical" href="https://holyrosaryfightsbacktn.com/petition.html" />
   <meta property="og:title" content="Sign the Darren Mullis petition — Holy Rosary Memphis" />
-  <meta property="og:description" content="Put Darren Mullis back as principal of Holy Rosary Catholic School." />
   <meta property="og:url" content="https://holyrosaryfightsbacktn.com/petition.html" />
   <meta property="og:image" content="https://holyrosaryfightsbacktn.com/img/fr-james-clark.png" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="gym">
-    <div class="where"><a href="index.html" style="color:inherit">← Full page</a></div>
-    <h1>Sign: Bring Darren Mullis home</h1>
-    <div class="score">Signed<br /><b id="signCount">0</b> / 1000</div>
+  <header class="bar">
+    <strong><a href="index.html">Holy Rosary Fights Back · TN</a></strong>
+    <div class="score"><b id="signCount">0</b> signed</div>
   </header>
-  <p class="hook">Put your name on the paper. Then send this link to every Ram you’ve got.</p>
-  <div class="board-wrap">
-    <div class="clipboard" id="petition">
-      <div class="metal" aria-hidden="true"></div>
-      <div class="sheet">
-        <h2>Petition to Bishop Talley, Fr. James Clark, and Catholic Schools of Memphis</h2>
-        <p class="ask">
-          Put <strong>Darren Mullis</strong> back as principal. Until you do, we will not tithe here and we will not attend here. We will go where the priest knows the people.
-        </p>
-        <form class="fields" id="petitionForm">
+  <div class="split">
+    <section class="sign" id="petition">
+      <h2>Sign: bring Darren Mullis home</h2>
+      <p class="ask">Put him back as principal of Holy Rosary Catholic School. Until then: no tithe, no pews. Find a parish where the priest knows the people.</p>
+      <form class="fields" id="petitionForm">
+        <div>
           <label for="pName">Signature (legal name)</label>
           <input id="pName" required />
+        </div>
+        <div>
           <label for="pRole">I am a</label>
           <select id="pRole">
             <option>Current parent</option>
@@ -40,32 +35,26 @@
             <option>Teacher / staff (on my own time)</option>
             <option>Neighbor / friend of the school</option>
           </select>
+        </div>
+        <div>
           <label for="pNote">One line if you want (optional)</label>
           <input id="pNote" maxlength="140" />
-          <label class="check">
-            <input id="pOk" type="checkbox" required />
-            <span>Show my name on this list and send it to the bishop, the pastor, and Catholic Schools of Memphis.</span>
-          </label>
-          <button class="sign-btn" type="submit">Sign this paper</button>
-          <p class="msg" id="pMsg"></p>
-        </form>
-        <p class="wall-title">Names on the sheet</p>
-        <ol class="wall" id="wall"></ol>
-      </div>
-    </div>
-    <aside class="side">
-      <span class="tape" aria-hidden="true"></span>
-      <div class="polaroid">
-        <img src="img/fr-james-clark.png" alt="Fr. James Clark" />
-        <p>Fr. Clark. April. Still downtown. Then Darren was gone.</p>
-      </div>
-      <div class="boycott">
-        <strong>Stop tithing. Stop attending. New parish.</strong>
-        <p>Where the priest knows the community.</p>
-      </div>
+        </div>
+        <label class="check">
+          <input id="pOk" type="checkbox" required />
+          <span>Show my name on this list and send it to the bishop, the pastor, and Catholic Schools of Memphis.</span>
+        </label>
+        <button class="sign-btn" type="submit">Sign this paper</button>
+        <p class="msg" id="pMsg"></p>
+      </form>
+      <p class="wall-title">Names</p>
+      <ol class="wall" id="wall"></ol>
+    </section>
+    <aside class="boycott">
+      <strong>Stop the tithing.<br />Stop attending.<br />Find a new parish.</strong>
+      <p><a href="index.html" style="color:#ffe9a8">The rest of the story →</a></p>
     </aside>
   </div>
-  <p class="hook"><a href="index.html">The rest of the story</a></p>
   <script src="app.js"></script>
 </body>
 </html>
