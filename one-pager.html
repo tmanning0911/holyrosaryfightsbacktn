@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bring Darren home — flyer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&family=IBM+Plex+Mono:wght@400;600&family=Literata:opsz,wght@7..72,500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #cfc6b4; font-family: Literata, Georgia, serif; color: #1a1714; }
+    .sheet {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 18px auto;
+      background: #efe6d4;
+      padding: 0.38in 0.48in;
+      border: 1px solid #1a1714;
+    }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      color: #5c564c;
+      border-bottom: 3px double #1a1714;
+      padding-bottom: 8px;
+    }
+    h1 { font-family: Fraunces, serif; font-size: 40px; line-height: 0.9; margin: 10px 0 8px; letter-spacing: -0.03em; }
+    h1 b { color: #1d3f8f; }
+    .grid { display: grid; grid-template-columns: 2.1in 1fr; gap: 16px; }
+    img { width: 100%; display: block; border: 1px solid #1a1714; }
+    .cap { font-family: "IBM Plex Mono", monospace; font-size: 10px; margin-top: 6px; }
+    .yell { background: #8f1a18; color: #ffe08a; padding: 12px 14px; font-family: Fraunces, serif; font-weight: 800; font-size: 22px; line-height: 1.15; }
+    ul, ol { margin: 8px 0 0; padding-left: 18px; }
+    li { margin: 4px 0; }
+    h2 { font-family: "IBM Plex Mono", monospace; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: #1d3f8f; margin: 14px 0 6px; }
+    footer { margin-top: 14px; border-top: 1px solid #1a1714; padding-top: 8px; font-size: 10px; font-family: "IBM Plex Mono", monospace; color: #5c564c; }
+    .no-print { text-align: center; padding: 12px; font-family: "IBM Plex Mono", monospace; font-size: 13px; }
+    @media print { body { background: #fff; } .sheet { margin: 0; border: 0; } .no-print { display: none; } }
+  </style>
+</head>
+<body>
+  <p class="no-print"><button onclick="window.print()">Print</button> · <a href="index.html">Back</a></p>
+  <article class="sheet">
+    <div class="top">
+      <span>Holy Rosary · East Memphis</span>
+      <span>August 2026</span>
+      <span>Families &amp; alumni</span>
+    </div>
+    <h1>Bring <b>Darren Mullis</b> home</h1>
+    <div class="grid">
+      <div>
+        <img src="img/fr-james-clark.png" alt="Fr. James Clark" />
+        <p class="cap">Fr. James Clark. Pastor since April. Still the chancellor. Four months later Darren was gone.</p>
+      </div>
+      <div>
+        <div class="yell">Sign the petition.<br />Stop the tithing.<br />Stop attending.<br />Find a parish where the priest knows his community.</div>
+        <h2>What happened</h2>
+        <ul>
+          <li>Darren: principal since 2003. Holy Rosary since he was two.</li>
+          <li>Aug 19 letter: he’s out. No reason.</li>
+          <li>Aug 21: they said “confidential.” Families went to the Catholic Center anyway.</li>
+        </ul>
+        <h2>Until he’s back</h2>
+        <ol>
+          <li>No envelope. Not one dollar.</li>
+          <li>Do not sit in those pews. Go to Mass somewhere else.</li>
+          <li>Call Clark 901-767-6949 · Bishop Talley 901-373-1200 · Fay 901-373-1221</li>
+        </ol>
+      </div>
+    </div>
+    <footer>holyrosaryfightsbacktn.com · Photo from the parish staff page. Not the parish office.</footer>
+  </article>
+</body>
+</html>

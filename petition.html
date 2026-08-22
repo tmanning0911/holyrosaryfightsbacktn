@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign: Put Darren Mullis back</title>
+  <meta name="description" content="Holy Rosary families petition to reinstate Principal Darren Mullis." />
+  <link rel="canonical" href="https://holyrosaryfightsbacktn.com/petition.html" />
+  <meta property="og:url" content="https://holyrosaryfightsbacktn.com/petition.html" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="gym">
+    <div class="where"><a href="index.html" style="color:inherit">← Full page</a></div>
+    <h1>Bring Darren home</h1>
+    <div class="score">Signed<br /><b id="signCount">0</b> / 1000</div>
+  </header>
+  <p class="hook">Put your name on the paper. Then send this link to every Ram you’ve got.</p>
+  <div class="board-wrap">
+    <div class="clipboard" id="petition">
+      <div class="metal" aria-hidden="true"></div>
+      <div class="sheet">
+        <h2>Petition to Bishop Talley, Fr. James Clark, and Catholic Schools of Memphis</h2>
+        <p class="ask">
+          Put <strong>Darren Mullis</strong> back as principal. Until you do, we will not tithe here and we will not attend here. We will go where the priest knows the people.
+        </p>
+        <form class="fields" id="petitionForm">
+          <label for="pName">Signature (legal name)</label>
+          <input id="pName" required />
+          <label for="pRole">I am a</label>
+          <select id="pRole">
+            <option>Current parent</option>
+            <option>Alum</option>
+            <option>Grandparent</option>
+            <option>Parishioner</option>
+            <option>Teacher / staff (on my own time)</option>
+            <option>Neighbor / friend of the school</option>
+          </select>
+          <label for="pNote">One line if you want (optional)</label>
+          <input id="pNote" maxlength="140" />
+          <label class="check">
+            <input id="pOk" type="checkbox" required />
+            <span>Show my name on this list and send it to the bishop, the pastor, and Catholic Schools of Memphis.</span>
+          </label>
+          <button class="sign-btn" type="submit">Sign this paper</button>
+          <p class="msg" id="pMsg"></p>
+        </form>
+        <p class="wall-title">Names on the sheet</p>
+        <ol class="wall" id="wall"></ol>
+      </div>
+    </div>
+    <aside class="side">
+      <span class="tape" aria-hidden="true"></span>
+      <div class="polaroid">
+        <img src="img/fr-james-clark.png" alt="Fr. James Clark" />
+        <p>Fr. Clark. April. Still downtown. Then Darren was gone.</p>
+      </div>
+      <div class="boycott">
+        <strong>Stop tithing. Stop attending. New parish.</strong>
+        <p>Where the priest knows the community.</p>
+      </div>
+    </aside>
+  </div>
+  <p class="hook"><a href="index.html">The rest of the story</a></p>
+  <script src="app.js"></script>
+</body>
+</html>
