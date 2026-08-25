@@ -1,0 +1,4 @@
+# Bing IndexNow key (optional). After adding the site in Bing Webmaster Tools,
+# you can enable IndexNow. This file proves ownership if you use this key.
+# Key: hrfbtn2026indexnow
+hrfbtn2026indexnow

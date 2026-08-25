@@ -27,6 +27,21 @@
   to = "/.netlify/functions/petition-count"
   status = 200
 
+[[redirects]]
+  from = "/pastor"
+  to = "/clark.html"
+  status = 200
+
+[[redirects]]
+  from = "/pastor/"
+  to = "/clark.html"
+  status = 200
+
+[[redirects]]
+  from = "/clark"
+  to = "/clark.html"
+  status = 301
+
 [[headers]]
   for = "/*"
   [headers.values]
@@ -35,6 +50,18 @@
     X-Content-Type-Options = "nosniff"
     Permissions-Policy = "geolocation=(), microphone=(), camera=()"
     Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=UTF-8"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=UTF-8"
+    Cache-Control = "public, max-age=3600"
 
 [[headers]]
   for = "/img/*"
