@@ -1,6 +1,6 @@
 # Very Rev. James M. Clark — public archive
 
-Compiled **August 22, 2026** from public diocesan, seminary, academic, and news sources. This is a **campaign research file**, not a parish bio and not a rap sheet.
+Compiled **August 22, 2026** (refreshed same evening for public dossier page `clark.html`) from public diocesan, seminary, academic, and news sources. This is a **campaign research file**, not a parish bio and not a rap sheet. The public face of this archive is **https://holyrosaryfightsbacktn.com/clark.html**.
 
 **Rule:** if it is not sourced below, it is not a fact. Do not invent a hometown, a family, a first parish, a motive for the Mullis letter, or a quote he did not publish. Do not say “Fr. Clark fired Darren” unless a named source says so.
 

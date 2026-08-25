@@ -19,7 +19,7 @@ Official spelling: **Darren Mullis** (not Dairn). School colors: **blue and gold
 
 We **do not have** (as of this briefing): a named author of the Aug 19 letter, a diocesan decree, Mullis’s own public statement, or a newsroom that says “Fr. Clark fired him.”
 
-**Petition:** [Change.org — Reinstate Darren Mullis](https://c.org/QLChJDQdbz) (started Aug 22, 2026, Ryan Taylor).
+**Petition:** [Change.org — Reinstate Darren Mullis](https://c.org/2LMccZY9dk) (started Aug 22, 2026, Ryan Taylor).
 
 **Aug 19 letter — only sentences the Commercial Appeal printed** (parents posted the letter; CA did not print a signature):
 
@@ -51,8 +51,10 @@ Do not treat this list as a rap sheet. Treat it as the **chain of keys**.
 - Co-voice of the Aug 21 joint statement.
 - Public: chris.fay@cc.cdom.org · 901-373-1221
 - Longtime Catholic-schools figure; CBHS assistant principal then principal (first non-Brother to lead CBHS; Daily Memphian, Mar 5, 2020: leaving at end of term).
-- Diocese *Faith* magazine (Oct 2024): wife **Rena**; six children (do not name them on the campaign site); coached baseball, basketball, and soccer at Holy Rosary; also taught/coached at SBA.
+- Diocese *Faith* magazine (Oct 2024): wife **Rena**; six children named in caption (Cecilia, Dominic, Madelynn, Thomas, Josephine, Audrey); coached baseball, basketball, and soccer at Holy Rosary; also taught/coached at SBA.
 - **Rena Fay**: Enrollment Coordinator, Holy Rosary Catholic School (staff directory + financial-aid page). rena.fay@holyrosarymemphis.org · 901-685-1231. Prior HR roles on LinkedIn: preschool/kindergarten assistant, development coordinator. **Do not target her or the children.** The public point is the family sitting on both sides of the desk.
+- **Cecilia Fay** (adult daughter; public business owner — may be named for the conflict frame only): founder/owner of **Cecilia Fay Creative** (social media / PR / brand; ceciliafaycreative.com). Public: Alumni Committee at Holy Rosary; career-day speaker on social media (LinkedIn, Mar 2025); bios claim pro-bono work for educational institutions (e.g. MMDC / event copy). Campaign families report her firm treated as HRS **sponsor** (paid or in-kind) on school communications/events — **no invoice or sponsor webpage found in public crawl; do not invent a paid contract.** Site line: appearance of conflict (Superintendent household + enrollment + daughter’s agency in school brand); ask for disclosure; **do not contact Cecilia.**
+- Site: Fay household conflict tree lives <strong>inline on Dr. Fay’s Offices card</strong> (CEO+superintendent; Rena enrollment; Cecilia sponsor/brand; prior coaching; Mullis/steering). No separate Conflicts page.
 - Site line: we can only **allege** he had a part in Mullis’s removal. No newsroom has assigned the decision to him.
 - **Not found (do not invent):** a published misconduct file; his mother’s name or workplace; proof the children were enrolled at Holy Rosary by name (coaching at HR + “Catholic schools” is the sourced frame).
 
@@ -69,7 +71,8 @@ Do not treat this list as a rap sheet. Treat it as the **chain of keys**.
 ### Adjacent (structure, not proven in this decision)
 - Vicar General: Very Rev. Keith Stewart, V.G.
 - Vicar for Clergy: Very Rev. Joey Kaump, V.F., E.V.
-- Interim principal: Rhiannon Thomas — **do not target her**. Demand the principal back.
+- Interim principal: Rhiannon Thomas (1st grade; former principal, Incarnation, Collierville). Incarnation K–8 closed 30 June 2020 (enrollment / finance; diocese + CA). Site stance: reject the interim appointment; restore Mullis. Do not tell people to harass her personally. Do not invent that she alone ordered the Incarnation closure.
+- Demand the principal back.
 
 ---
 
@@ -94,7 +97,7 @@ Do not treat this list as a rap sheet. Treat it as the **chain of keys**.
 
 **Do not use (libel / invention)**
 - Claims of abuse, money crimes, heresy, or a named “plot” without a source.
-- Attacks on Rhiannon Thomas, students, or Mullis’s children.
+- Attacks on students or Mullis’s children. Do not invent personal misconduct by Rhiannon Thomas. Public record on Incarnation’s 2020 K–8 closure and the interim appointment may be stated; the ask is restore Mullis.
 - “Fr. Clark fired him” as a stated fact until a source says so.
 - Fake petition counts, fake quotes, fake diagnoses.
 
@@ -115,7 +118,7 @@ Poplar / I-240 / East Memphis / Shelby Oaks approaches first. Keep type huge. Bl
 
 ## Still needed from the campaign (not invented here)
 
-1. Live petition: https://c.org/QLChJDQdbz (Change.org — Ryan Taylor)
+1. Live petition: https://c.org/2LMccZY9dk (Change.org — Ryan Taylor)
 2. Campaign inbox → `CAMPAIGN_EMAIL` (then Formspree/Netlify Forms)
 3. Domain: **holyrosaryfightsback.com** (also grab bringmullishome.com if you can)
 4. Permissioned photos of the Aug 21 protest (Daily Memphian photos are copyrighted — don’t scrape them)

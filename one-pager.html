@@ -1,100 +1,311 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Restore Principal Darren Mullis — flyer</title>
+  <title>Print flyer — Restore Darren Mullis | Rams Fight Back</title>
+  <meta name="description" content="Printable flyer: restore Principal Darren Mullis at Holy Rosary Catholic School, Memphis. Sign at c.org/2LMccZY9dk." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://holyrosaryfightsbacktn.com/one-pager.html" />
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;0,700;0,800;0,900;1,800;1,900&display=swap" rel="stylesheet" />
   <style>
     * { box-sizing: border-box; }
-    body { margin: 0; background: #cfc6b4; font-family: Georgia, "Times New Roman", serif; color: #1a1814; }
+    body {
+      margin: 0;
+      background: #c5c9d4;
+      font-family: "Montserrat", Arial, Helvetica, sans-serif;
+      color: #151210;
+    }
     .sheet {
       width: 8.5in;
       max-width: 100%;
       min-height: 11in;
       margin: 18px auto;
-      background: #f4f0e6;
-      padding: 0.4in 0.5in;
-      border: 1px solid #1a1814;
-    }
-    .top {
+      background: #fff;
+      border: 1px solid #002269;
       display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .mast {
+      background: #002269;
+      color: #fff;
+      padding: 0.22in 0.4in;
+      display: flex;
+      align-items: center;
       justify-content: space-between;
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #5c564c;
-      border-bottom: 3px solid #002269;
-      padding-bottom: 8px;
+      gap: 14px;
+      border-bottom: 5px solid #ffc72a;
     }
-    h1 {
-      font-family: "Arial Narrow", "Franklin Gothic Medium", Impact, sans-serif;
-      font-size: 42px;
-      line-height: 0.95;
-      margin: 12px 0 10px;
-      text-transform: uppercase;
+    .mast-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
-    h1 b { color: #002269; }
-    .grid { display: grid; grid-template-columns: 2.1in 1fr; gap: 16px; }
-    img { width: 100%; display: block; border: 1px solid #1a1814; }
-    .cap { font-family: Arial, Helvetica, sans-serif; font-size: 10px; margin-top: 6px; }
-    .yell {
-      background: #7a1414;
-      color: #f4f0e6;
-      padding: 12px 14px;
-      font-family: "Arial Narrow", Impact, sans-serif;
-      font-weight: 700;
+    .mast-brand img {
+      width: 0.95in;
+      height: auto;
+      display: block;
+    }
+    .mast-text .name {
+      margin: 0;
       font-size: 20px;
-      line-height: 1.2;
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: -0.02em;
       text-transform: uppercase;
+      color: #ffc72a;
+      line-height: 1;
     }
-    ul, ol { margin: 8px 0 0; padding-left: 18px; }
-    li { margin: 4px 0; }
-    h2 {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 11px;
+    .mast-text .tag {
+      margin: 5px 0 0;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.82);
+    }
+    .mast-where {
+      margin: 0;
+      font-size: 9px;
+      font-weight: 800;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #002269;
-      margin: 14px 0 6px;
+      color: rgba(255,255,255,0.65);
+      text-align: right;
+      line-height: 1.45;
     }
-    footer {
-      margin-top: 14px;
-      border-top: 1px solid #1a1814;
-      padding-top: 8px;
+    .hero {
+      display: grid;
+      grid-template-columns: 1.55in 1fr;
+      gap: 0.28in;
+      padding: 0.32in 0.4in 0.28in;
+      align-items: start;
+      background: #f7f8fc;
+      border-bottom: 1px solid #dce1ec;
+    }
+    .hero-photo {
+      margin: 0;
+    }
+    .hero-photo img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+      border: 3px solid #ffc72a;
+      box-shadow: 0 6px 16px rgba(0, 34, 105, 0.18);
+      object-fit: cover;
+      aspect-ratio: 3 / 4;
+      background: #002269;
+    }
+    .hero-copy h1 {
+      margin: 0 0 0.35em;
+      font-size: 22px;
+      font-weight: 900;
+      font-style: italic;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: #002269;
+      line-height: 1.05;
+    }
+    .hero-copy .role {
+      margin: 0 0 0.55em;
       font-size: 10px;
-      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5a6478;
+    }
+    .hero-copy .bio {
+      margin: 0;
+      font-size: 12.5px;
+      font-weight: 600;
+      line-height: 1.45;
+      color: #1a1f2c;
+    }
+    .body {
+      padding: 0.28in 0.4in 0.32in;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2in;
+    }
+    .known {
+      margin: 0;
+      padding: 12px 14px;
+      background: #002269;
+      color: #fff;
+      border-radius: 10px;
+      border-left: 5px solid #ffc72a;
+    }
+    .known .eyebrow {
+      margin: 0 0 6px;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #ffc72a;
+    }
+    .known p {
+      margin: 0;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    .known .canon {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 199, 42, 0.35);
+      font-size: 11px;
+      color: rgba(255,255,255,0.78);
+    }
+    .yell {
+      background: #002269;
+      color: #fff;
+      padding: 14px 16px;
+      border-radius: 10px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px 18px;
+      align-items: center;
+    }
+    .yell strong {
+      display: block;
+      font-size: 20px;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: #ffc72a;
+      margin-bottom: 6px;
+      font-weight: 900;
+      font-style: italic;
+    }
+    .yell p {
+      margin: 0;
+      font-size: 12.5px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: rgba(255,255,255,0.92);
+    }
+    .qr-wrap { text-align: center; }
+    .qr {
+      width: 1.2in;
+      height: 1.2in;
+      background: #fff;
+      padding: 5px;
+      border: 2px solid #ffc72a;
+      border-radius: 8px;
+      margin: 0 auto;
+    }
+    .qr img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .qr-cap {
+      margin: 5px 0 0;
+      font-size: 8px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ffc72a;
+      font-weight: 800;
+    }
+    .cols {
+      display: grid;
+      grid-template-columns: 1.25fr 0.85fr;
+      gap: 0.28in;
+    }
+    h2 {
+      margin: 0 0 8px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #002269;
+      font-weight: 900;
+    }
+    ol {
+      margin: 0;
+      padding-left: 1.15em;
+      font-size: 12.5px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+    li { margin: 0.28em 0; }
+    .note {
+      margin: 12px 0 0;
+      padding: 10px 12px;
+      background: #f4f6fb;
+      border: 1px solid #d0d6e4;
+      border-left: 4px solid #ffc72a;
+      border-radius: 0 8px 8px 0;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+    .note b { color: #002269; }
+    .phones {
+      margin: 0;
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.7;
+    }
+    .phones b {
+      display: inline-block;
+      min-width: 5.4em;
+      color: #002269;
+      font-weight: 900;
+    }
+    .phones span {
+      font-weight: 600;
+      color: #3a4254;
+    }
+    footer.foot {
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 2px solid #002269;
+      font-size: 9.5px;
+      font-weight: 600;
+      line-height: 1.45;
       color: #5c564c;
     }
-    .no-print { text-align: center; padding: 12px; font-family: Arial, Helvetica, sans-serif; font-size: 13px; }
+    .no-print {
+      text-align: center;
+      padding: 14px 12px 6px;
+      font-size: 13px;
+    }
     .no-print button,
     .no-print a {
       display: inline-block;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: "Montserrat", Arial, Helvetica, sans-serif;
       font-size: 14px;
-      font-weight: 700;
+      font-weight: 800;
       padding: 12px 18px;
       margin: 0 6px 8px;
       text-decoration: none;
       border: 0;
       cursor: pointer;
       min-height: 44px;
+      vertical-align: middle;
+      border-radius: 8px;
     }
     .no-print button { background: #002269; color: #ffc72a; }
-    .no-print a { background: transparent; color: #002269; border: 1px solid #002269; }
+    .no-print a { background: #fff; color: #002269; border: 1px solid #002269; }
     @media (max-width: 700px) {
-      body { background: #f4f0e6; }
-      .sheet {
-        width: auto;
-        min-height: 0;
-        margin: 0;
-        padding: 20px 16px 32px;
-        border: 0;
-      }
-      .grid { grid-template-columns: 1fr; }
-      .top { flex-wrap: wrap; gap: 6px; }
-      h1 { font-size: 28px; }
-      .yell { font-size: 16px; }
+      body { background: #fff; }
+      .sheet { width: auto; min-height: 0; margin: 0; border: 0; }
+      .mast { flex-direction: column; align-items: flex-start; padding: 16px; }
+      .mast-where { text-align: left; }
+      .hero { grid-template-columns: 120px 1fr; padding: 16px; }
+      .body { padding: 16px 16px 28px; }
+      .cols { grid-template-columns: 1fr; }
+      .yell { grid-template-columns: 1fr; }
+      .qr { width: 1.4in; height: 1.4in; }
+      .yell strong { font-size: 18px; }
       .no-print button,
       .no-print a {
         display: block;
@@ -103,40 +314,107 @@
         text-align: center;
       }
     }
-    @media print { body { background: #fff; } .sheet { margin: 0; border: 0; width: 8.5in; } .no-print { display: none; } }
+    @media print {
+      @page { margin: 0.3in; size: letter; }
+      body { background: #fff; }
+      .sheet {
+        margin: 0;
+        border: 0;
+        width: 100%;
+        min-height: 0;
+        box-shadow: none;
+      }
+      .no-print { display: none !important; }
+    }
   </style>
 </head>
 <body>
-  <p class="no-print"><button onclick="window.print()">Print</button> · <a href="index.html">Back</a></p>
+  <p class="no-print">
+    <button type="button" onclick="window.print()">Print this flyer</button>
+    <a href="index.html">Back to site</a>
+  </p>
+
   <article class="sheet">
-    <div class="top">
-      <span>Holy Rosary · East Memphis</span>
-      <span>August 2026</span>
-      <span>The Christian faithful</span>
-    </div>
-    <h1>Restore <b>Darren Mullis</b></h1>
-    <div class="grid">
-      <div>
-        <img src="img/fr-james-clark.png" alt="Fr. James Clark" />
-        <p class="cap">The Very Rev. James M. Clark, J.C.D. Pastor since April, remaining chancellor and judicial vicar. Four months later the principal was gone. We name the offices. We do not invent a decree.</p>
+    <header class="mast">
+      <div class="mast-brand">
+        <img src="img/ram-fight-back-logo.png" width="280" height="206" alt="Rams Fight Back" />
+        <div class="mast-text">
+          <p class="name">Rams Fight Back</p>
+          <p class="tag">Restore Principal Darren Mullis</p>
+        </div>
       </div>
-      <div>
-        <div class="yell">Sign: c.org/QLChJDQdbz<br />Keep Sunday Mass. Not in this parish.<br />Remain in communion with Rome.</div>
-        <h2>What happened</h2>
-        <ul>
-          <li>Darren: principal since 2003. Holy Rosary since he was two.</li>
-          <li>19 August letter: he will be departing. No cause given.</li>
-          <li>21 August: Holy Rosary Parish and Catholic Schools of Memphis called it confidential. The faithful went to the Catholic Center.</li>
-        </ul>
-        <h2>Until he is restored</h2>
-        <ol>
-          <li>Hear Mass. Do not omit it. Hear it at another Catholic parish.</li>
-          <li>Direct the offering there. Request any capital gift returned if you so choose.</li>
-          <li>Call the pastor 901-767-6949 · the bishop 901-373-1200 · Dr. Fay 901-373-1221</li>
-        </ol>
+      <p class="mast-where">Holy Rosary Catholic School<br />East Memphis · August 2026</p>
+    </header>
+
+    <section class="hero">
+      <figure class="hero-photo">
+        <img src="img/darren-mullis.jpg" alt="Principal Darren Mullis" width="700" height="900" />
+      </figure>
+      <div class="hero-copy">
+        <h1>Darren Mullis</h1>
+        <p class="role">Principal · Holy Rosary Catholic School · since 2003</p>
+        <p class="bio">
+          A Ram from the start: Holy Rosary through eighth grade, then Christian Brothers High School, class of 1986.
+          He came home to teach, to lead youth ministry and religious education, and in 2003 the parish named him principal.
+          With his wife, Betty Ann, and their children, this school has been theirs for nearly fifty years.
+        </p>
       </div>
+    </section>
+
+    <div class="body">
+      <div class="known">
+        <p class="eyebrow">What is known</p>
+        <p>
+          <strong>19 Aug 2026</strong> — Parents were told Darren Mullis “will be departing” as principal of Holy Rosary Catholic School.
+          No public cause was given. He has held the office since 2003.
+        </p>
+        <p class="canon">Independent of the parish and the diocese. In communion with the Holy Father. Canon 212 §3.</p>
+      </div>
+
+      <div class="yell">
+        <div>
+          <strong>Sign: c.org/2LMccZY9dk</strong>
+          <p>Sign, call, and share — until Darren Mullis is restored. Goal: 25,000 Rams on Change.org.</p>
+        </div>
+        <div class="qr-wrap">
+          <div class="qr">
+            <img src="img/qr-petition.png" alt="QR code: sign the petition at c.org/2LMccZY9dk" width="396" height="396" />
+          </div>
+          <p class="qr-cap">Scan to sign</p>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div>
+          <h2>Take action</h2>
+          <ol>
+            <li>Sign the petition and share it with every Ram you know.</li>
+            <li>Call the offices below — with reverence — and ask that Darren be restored.</li>
+            <li>Text a Ram. Post the link. Your name and your share are what we need.</li>
+          </ol>
+          <p class="note">
+            <b>Note.</b> An anonymous Ram alum has reached out to Holy Rosary to donate <b>$1 million</b> toward the capital improvement campaign
+            in honor of Darren Mullis — after the signature match was met — and to explore naming rights.
+            That gift is offered to the parish. This flyer does not solicit donations.
+          </p>
+        </div>
+        <div>
+          <h2>Call them</h2>
+          <p class="phones">
+            <b>Pastor</b> <span>901-767-6949</span><br />
+            <b>Bishop</b> <span>901-373-1200</span><br />
+            <b>Dr. Fay</b> <span>901-373-1221</span>
+            <br /><span style="font-size:11px;font-weight:600;color:#5a6478">President / CEO · Superintendent</span>
+          </p>
+        </div>
+      </div>
+
+      <footer class="foot">
+        <strong>Rams Fight Back</strong> — independent petition of the Christian faithful of Holy Rosary.
+        Not the parish. Not the diocese. Not the Holy See.
+        Privately funded by a small group of older Holy Rosary alumni. We do not solicit donations.
+      </footer>
     </div>
-    <footer>holyrosaryfightsbacktn.com · The Christian faithful, in their own name. Not the parish. Not the diocese. Not the Holy See.</footer>
   </article>
 </body>
 </html>

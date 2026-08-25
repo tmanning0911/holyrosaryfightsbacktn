@@ -1,10 +1,16 @@
 /* Petition + letter */
 const SITE = "https://holyrosaryfightsbacktn.com";
-const PETITION_URL = "https://c.org/QLChJDQdbz";
+const PETITION_URL = "https://c.org/2LMccZY9dk";
+const PETITION_COUNT_URL = "/api/petition-count";
+const CAMPAIGN_URL = "/data/campaign.json";
+const MATCH_PER_SIGNATURE = 100;
+/* Paste your Page URL here when you have it (e.g. https://www.facebook.com/YourPage) */
+const FACEBOOK_PAGE = "https://www.facebook.com/holyrosaryfightsbacktn";
 const PETITION_ENDPOINT = "";
 const KEY = "hrfb_petition";
 
 const SEED = [];
+let changeSigners = [];
 
 function mergeList(list) {
   const extra = Array.isArray(list) ? list : loadLocal();
@@ -18,14 +24,12 @@ const TO = [
   "chancellor@cc.cdom.org",
   "churchoffice@holyrosarymemphis.org",
   "chris.fay@cc.cdom.org",
-  "nic.antoine@cc.cdom.org",
   "rick.ouellette@cc.cdom.org",
 ].join(",");
 
 const LETTER_BODY = (name, role) => `The Very Reverend James M. Clark, J.C.D.
 The Most Reverend David P. Talley
 Dr. Chris Fay
-Mr. Pierre Nic Antoine
 
 I am a ${role} writing in my own name, in communion with the Holy Father and with the Bishop of Memphis.
 
@@ -37,7 +41,7 @@ Father Clark has been pastor four months and retains the offices of chancellor a
 
 Until that is done I will fulfill the Sunday obligation (can. 1247) at another Catholic parish, and I will direct my free-will offerings there. I do not omit Mass. I do not leave the Church.
 
-The petition of the faithful: https://c.org/QLChJDQdbz
+The petition of the faithful: https://c.org/2LMccZY9dk
 
 Respectfully in Christ,
 
@@ -58,23 +62,75 @@ function saveLocal(list) {
 
 function renderWall(list) {
   const wall = document.getElementById("wall");
-  const combined = mergeList(list);
   if (!wall) return;
   wall.innerHTML = "";
-  const show = combined.slice().reverse();
-  if (!show.length) {
+
+  const fromChange = changeSigners.map((s) => ({
+    name: s.name,
+    role: formatSignerWhen(s),
+    note: "",
+    comment: s.comment || "",
+    at: s.at || "",
+    source: "change",
+  }));
+  const local = mergeList(list).map((r) => ({
+    ...r,
+    role: r.role ? `${r.role} · this site` : "this site",
+    source: "local",
+  }));
+  const seen = new Set(fromChange.map((r) => (r.name || "").trim().toLowerCase()));
+  const combined = fromChange.concat(
+    local.filter((r) => !seen.has((r.name || "").trim().toLowerCase()))
+  );
+
+  if (!combined.length) {
     const li = document.createElement("li");
     li.className = "empty";
-    li.textContent = "No names on this sheet yet.";
+    li.textContent = "Loading names from Change.org…";
     wall.appendChild(li);
     return;
   }
-  show.forEach((row) => {
+
+  combined.forEach((row) => {
     const li = document.createElement("li");
+    if (row.source === "change") li.classList.add("from-change");
     const note = row.note ? ` — ${row.note}` : "";
-    li.innerHTML = `${escapeHtml(row.name)} <span>${escapeHtml(row.role)}${escapeHtml(note)}</span>`;
+    const comment = row.comment
+      ? `<span class="wall-comment">${escapeHtml(row.comment)}</span>`
+      : "";
+    li.innerHTML = `${escapeHtml(row.name)} <span>${escapeHtml(row.role)}${escapeHtml(note)}</span>${comment}`;
     wall.appendChild(li);
   });
+}
+
+function formatSignerWhen(s) {
+  if (s && s.at) {
+    const rel = relativeTime(s.at);
+    if (rel) return rel;
+  }
+  return (s && s.relative) || "Change.org";
+}
+
+function relativeTime(iso) {
+  const t = Date.parse(iso);
+  if (Number.isNaN(t)) return "";
+  const sec = Math.round((Date.now() - t) / 1000);
+  if (sec < 45) return "just now";
+  if (sec < 3600) return `${Math.max(1, Math.round(sec / 60))} min ago`;
+  if (sec < 86400) {
+    const h = Math.round(sec / 3600);
+    return h === 1 ? "1 hour ago" : `${h} hours ago`;
+  }
+  const d = Math.round(sec / 86400);
+  return d === 1 ? "1 day ago" : `${d} days ago`;
+}
+
+function setWallUpdated(iso) {
+  const el = document.getElementById("wallUpdated");
+  if (!el || !iso) return;
+  const rel = relativeTime(iso);
+  el.textContent = rel ? `Updated ${rel}` : "Live names";
+  el.title = "";
 }
 
 function escapeHtml(s) {
@@ -151,13 +207,13 @@ document.getElementById("petitionForm")?.addEventListener("submit", async (e) =>
   const list = loadLocal();
   list.push(row);
   saveLocal(list);
-  renderWall(list);
   e.target.reset();
   document.getElementById("pOk").checked = false;
   msg.className = "msg ok";
   msg.textContent = `Your name is with the petition. Share this page with the faithful who know this school.`;
   btn.disabled = false;
 });
+
 
 function letterText() {
   const name = document.getElementById("fromName")?.value.trim() || "[Your name]";
@@ -242,31 +298,204 @@ navLinks?.querySelectorAll("a").forEach((a) => {
   });
 });
 
-const flip = document.getElementById("flip");
-if (flip && !sessionStorage.getItem("hrfb_flip_v2")) {
-  const seen = () => sessionStorage.setItem("hrfb_flip_v2", "1");
-  const shut = () => {
-    flip.close();
-    seen();
-  };
-  const open = () => {
-    if (typeof flip.showModal === "function") flip.showModal();
-  };
-  const quiet = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const start = () => (quiet ? open() : setTimeout(open, 650));
-  if (document.readyState === "complete") start();
-  else window.addEventListener("load", start);
-  document.getElementById("flipClose")?.addEventListener("click", shut);
-  document.getElementById("flipSkip")?.addEventListener("click", shut);
-  document.getElementById("flipSign")?.addEventListener("click", seen);
-  flip.addEventListener("cancel", seen);
-  flip.addEventListener("click", (e) => {
-    if (e.target === flip) shut();
+/* Entry popup removed — hero + dock carry the Sign CTA */
+
+if (FACEBOOK_PAGE) {
+  document.querySelectorAll("#fbPage, #fbPageFoot").forEach((a) => {
+    a.href = FACEBOOK_PAGE;
   });
 }
 
-pullRemote().then(renderWall);
-renderWall(loadLocal());
+let campaignBoards = {
+  perSignature: MATCH_PER_SIGNATURE,
+  match: true,
+  goal: 1000000,
+  note: "$100 matched per Change.org signature · up to $1 million · capital gift in Darren’s honor",
+  funder:
+    "We are no longer moving forward with the billboards. A Ram alum still matches $100 for every Change.org signature, up to $1 million — and those funds will now be donated in honor of Darren Mullis toward Holy Rosary’s capital improvement campaign. We continue collecting signatures for the petition. This is not a donation through Change.org.",
+};
+let lastPetitionTotal = null;
+let lastPetitionGoal = null;
+
+function money(n) {
+  if (n == null || Number.isNaN(Number(n))) return null;
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(Number(n));
+}
+
+function syncBoardsFromSignatures() {
+  const per = Number(campaignBoards.perSignature) || MATCH_PER_SIGNATURE;
+  if (lastPetitionTotal == null || Number.isNaN(lastPetitionTotal)) {
+    renderBoardsFund(campaignBoards);
+    return;
+  }
+  const raised = lastPetitionTotal * per;
+  const goal =
+    lastPetitionGoal != null && !Number.isNaN(lastPetitionGoal)
+      ? lastPetitionGoal * per
+      : campaignBoards.goal != null
+        ? Number(campaignBoards.goal)
+        : null;
+  renderBoardsFund({
+    ...campaignBoards,
+    raised,
+    goal,
+    signatures: lastPetitionTotal,
+    perSignature: per,
+    updatedAt: campaignBoards.updatedAt || new Date().toISOString(),
+  });
+}
+
+function renderBoardsFund(boards) {
+  if (!boards || typeof boards !== "object") return;
+  const raised = boards.raised != null ? Number(boards.raised) : null;
+  const goal = boards.goal != null ? Number(boards.goal) : null;
+  const per = Number(boards.perSignature) || MATCH_PER_SIGNATURE;
+  const sigs = boards.signatures != null ? Number(boards.signatures) : null;
+  const raisedLabel = money(raised);
+  const goalLabel = money(goal);
+  const hasTotal = raisedLabel != null;
+
+  const raisedEl = document.getElementById("boardsRaised");
+  const subEl = document.getElementById("boardsSub");
+  const barEl = document.getElementById("boardsBar");
+  const goalLine = document.getElementById("boardsGoalLine");
+  const noteEl = document.getElementById("boardsNote");
+  const updatedEl = document.getElementById("boardsUpdated");
+  const miniRaised = document.getElementById("boardsRaisedMini");
+  const miniGoal = document.getElementById("boardsGoalMini");
+
+  if (subEl) {
+    subEl.textContent =
+      boards.note ||
+      `Every signature = ${money(per) || "$100"} matched toward capital improvement in Darren’s honor`;
+  }
+  if (noteEl) {
+    noteEl.textContent =
+      boards.funder ||
+      "We are no longer moving forward with the billboards. A Ram alum still matches $100 for every Change.org signature, up to $1 million — and those funds will now be donated in honor of Darren Mullis toward Holy Rosary’s capital improvement campaign. We continue collecting signatures for the petition. This is not a donation through Change.org.";
+  }
+  if (updatedEl) {
+    if (sigs != null) {
+      updatedEl.textContent = `Live with ${new Intl.NumberFormat("en-US").format(sigs)} signatures`;
+    } else if (boards.updatedAt) {
+      const rel = relativeTime(boards.updatedAt);
+      updatedEl.textContent = rel ? `Updated ${rel}` : "Live";
+    } else {
+      updatedEl.textContent = hasTotal ? "Live" : "Standing";
+    }
+  }
+
+  if (raisedEl) {
+    raisedEl.textContent = hasTotal ? raisedLabel : "—";
+  }
+  if (goalLine) {
+    if (hasTotal && goalLabel) {
+      goalLine.textContent =
+        raised >= goal
+          ? `Match goal met — ${money(per)} per signature keeps going.`
+          : `Toward ${goalLabel} · ${money(per)} matched per signature`;
+    } else if (hasTotal && sigs != null) {
+      goalLine.textContent = `${new Intl.NumberFormat("en-US").format(sigs)} signatures × ${money(per)} = ${raisedLabel} matched`;
+    } else if (hasTotal) {
+      goalLine.textContent = "Matched toward capital improvement in Darren’s honor";
+    } else {
+      goalLine.textContent = "Signs unlock the match.";
+    }
+  }
+  if (barEl) {
+    if (hasTotal && goal && goal > 0) {
+      const pct = Math.max(3, Math.min(100, Math.round((raised / goal) * 100)));
+      barEl.style.width = pct + "%";
+    } else if (hasTotal) {
+      barEl.style.width = "100%";
+    } else {
+      barEl.style.width = "8%";
+    }
+  }
+
+  if (miniRaised && hasTotal) {
+    miniRaised.textContent = raisedLabel;
+  }
+  if (miniGoal) {
+    miniGoal.textContent =
+      "A Ram alum matches $100 per Change.org signature toward Holy Rosary’s capital improvement campaign, up to $1 million — donated in honor of Darren Mullis. We are no longer moving forward with the billboards. We continue collecting signatures. Not a donation through Change.org.";
+  }
+}
+
+async function loadCampaign() {
+  try {
+    const res = await fetch(`${CAMPAIGN_URL}?t=${Date.now()}`, { credentials: "omit" });
+    if (!res.ok) {
+      syncBoardsFromSignatures();
+      return;
+    }
+    const data = await res.json();
+    if (data && data.boards) {
+      campaignBoards = { ...campaignBoards, ...data.boards };
+    }
+    syncBoardsFromSignatures();
+  } catch {
+    syncBoardsFromSignatures();
+  }
+}
+
+async function loadPetitionCount() {
+  const box = document.getElementById("petitionTally");
+  const num = document.getElementById("petitionCount");
+  const bar = document.getElementById("petitionBar");
+  const goalEl = document.getElementById("petitionGoal");
+  try {
+    const res = await fetch(PETITION_COUNT_URL, { credentials: "omit" });
+    if (!res.ok) return;
+    const data = await res.json();
+    if (!data || !data.ok) return;
+
+    /* Count + board match only (names wall removed from the site) */
+    if (box && num && data.total != null) {
+      const total = Number(data.total);
+      const goal = data.goal ? Number(data.goal) : null;
+      lastPetitionTotal = total;
+      lastPetitionGoal = goal && goal > 0 ? goal : null;
+      num.textContent = new Intl.NumberFormat("en-US").format(total);
+      box.hidden = false;
+      if (goal && goal > 0 && bar) {
+        const pct = Math.max(2, Math.min(100, Math.round((total / goal) * 100)));
+        bar.style.width = pct + "%";
+        if (goalEl) {
+          goalEl.textContent =
+            total >= goal
+              ? "Next goal coming — keep signing."
+              : `Toward ${new Intl.NumberFormat("en-US").format(goal)} on Change.org`;
+        }
+      } else if (goalEl) {
+        goalEl.textContent = "Live from Change.org";
+      }
+      syncBoardsFromSignatures();
+    }
+  } catch {
+    /* tally stays as-is */
+  }
+}
+loadPetitionCount();
+loadCampaign();
+setInterval(() => {
+  loadPetitionCount();
+  loadCampaign();
+}, 60_000);
+
+const dock = document.querySelector(".dock");
+if (dock) {
+  const syncDock = () => {
+    const show = window.scrollY > Math.min(window.innerHeight * 0.55, 420);
+    dock.classList.toggle("show", show);
+  };
+  syncDock();
+  window.addEventListener("scroll", syncDock, { passive: true });
+}
 
 window.exportPetition = function () {
   const rows = [["name", "role", "note", "at"], ...loadLocal().map((r) => [r.name, r.role, r.note, r.at])];
@@ -276,3 +505,14 @@ window.exportPetition = function () {
   a.download = "holy-rosary-petition.csv";
   a.click();
 };
+
+function openFoldFromHash() {
+  const id = (location.hash || "").replace(/^#/, "");
+  if (!id) return;
+  const el = document.getElementById(id);
+  if (!el) return;
+  const fold = el.matches("details.fold") ? el : el.closest("details.fold");
+  if (fold) fold.open = true;
+}
+openFoldFromHash();
+window.addEventListener("hashchange", openFoldFromHash);

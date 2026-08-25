@@ -1,14 +1,42 @@
 [build]
   publish = "."
+  functions = "netlify/functions"
+  command = "npm install --omit=dev"
+
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["netlify/lib/**"]
+  external_node_modules = ["@netlify/blobs"]
+
+[functions."petition-refresh"]
+  schedule = "*/15 * * * *"
 
 [[redirects]]
-  from = "/petition"
-  to = "/petition.html"
+  from = "https://www.holyrosaryfightsbacktn.com/*"
+  to = "https://holyrosaryfightsbacktn.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/api/petition-count"
+  to = "/.netlify/functions/petition-count"
+  status = 200
+
+[[redirects]]
+  from = "/api/petition-feed"
+  to = "/.netlify/functions/petition-count"
   status = 200
 
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
-    Referrer-Policy = "no-referrer-when-downgrade"
+    Referrer-Policy = "strict-origin-when-cross-origin"
     X-Content-Type-Options = "nosniff"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"

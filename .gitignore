@@ -1,4 +1,16 @@
 .DS_Store
+node_modules/
+__pycache__/
+.venv/
+.venv-img/
+.rembg-cache/
 
 # Local Netlify folder
 .netlify
+
+# Unused oversized drafts
+img/hero-desktop.png
+img/hero-mobile.png
+img/hero-square.png
+img/uwd-logo-ref.png
+img/ram-fight-back-logo-ai.png

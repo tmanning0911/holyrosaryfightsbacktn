@@ -1,0 +1,12 @@
+{
+  "boards": {
+    "perSignature": 100,
+    "match": true,
+    "matcher": "anonymous Ram alum",
+    "goal": 1000000,
+    "currency": "USD",
+    "note": "$100 matched per Change.org signature · up to $1 million · capital gift in Darren’s honor",
+    "funder": "We are no longer moving forward with the billboards. A Ram alum still matches $100 for every Change.org signature, up to $1 million — and those funds will now be donated in honor of Darren Mullis toward Holy Rosary’s capital improvement campaign. We continue collecting signatures for the petition. This is not a donation through Change.org.",
+    "updatedAt": null
+  }
+}
