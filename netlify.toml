@@ -8,6 +8,9 @@
   included_files = ["netlify/lib/**", "email-previews/welcome.html", "email-previews/press-release-media-pitch.html"]
   external_node_modules = ["@netlify/blobs"]
 
+[functions."tts"]
+  timeout = 60
+
 [functions."petition-refresh"]
   schedule = "*/15 * * * *"
 

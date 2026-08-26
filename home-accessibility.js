@@ -9,8 +9,10 @@
 
   const GOAL_DEFAULT = 25000;
   const PLAYBACK_RATE = 1;
-  const PREFETCH_AHEAD = 2;
-  const CHUNK_MAX = 850;
+  const PREFETCH_AHEAD = 1;
+  const CHUNK_MAX = 420;
+  const SILENT_MP3 =
+    "data:audio/mpeg;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4Ljc2LjEwMAAAAAAAAAAAAAAA//tQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWGluZwAAAA8AAAACAAABhgC7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7//////////////////////////////////////////////////////////////////8AAAAATGF2YzU4LjEzAAAAAAAAAAAAAAAAJAAAAAAAAAAAAYYoRwmHAAAAAAD/+1DEAAAHAAGf9AAAIgAANIAAAAQAAAaEAAAAAABAAAAAAAAAAAAAAAAAAAAAAA//tQxAAADwAABpAAAACAAADSAAAAEAAAGkAAAAIAAANIAAAARMQU1FMy45OS41AAAAAAAAAAAAAAA//tQxAoADwAABpAAAACAAADSAAAAEVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV";
 
   let audio = null;
   let objectUrl = null;
@@ -19,10 +21,58 @@
   let playing = false;
   let paused = false;
   let prefetchCache = new Map();
-  let ttsVoiceName = "";
+  let audioUnlocked = false;
+  const IDLE_LABEL = "Listen to our mission";
+
+  function ensureAudio() {
+    if (!audio) {
+      audio = new Audio();
+      audio.preload = "auto";
+      audio.playbackRate = PLAYBACK_RATE;
+    }
+    return audio;
+  }
+
+  function unlockAudioPlayback() {
+    if (audioUnlocked) return;
+    const player = ensureAudio();
+    const prevSrc = player.src;
+    player.src = SILENT_MP3;
+    const attempt = player.play();
+    if (!attempt || typeof attempt.then !== "function") return;
+    attempt
+      .then(() => {
+        player.pause();
+        player.currentTime = 0;
+        audioUnlocked = true;
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (player.src === SILENT_MP3) {
+          player.removeAttribute("src");
+          player.load();
+        } else if (prevSrc) {
+          player.src = prevSrc;
+        }
+      });
+  }
+
+  function playbackBlocked(err) {
+    const name = err?.name || "";
+    const msg = String(err?.message || "");
+    return name === "NotAllowedError" || /not allowed|user gesture|interact/i.test(msg);
+  }
 
   function setLabel(text) {
     if (labelEl) labelEl.textContent = text;
+  }
+
+  function formatPlaybackError(err) {
+    if (playbackBlocked(err)) return "Tap Listen again to start audio";
+    if (String(err?.message || "").includes("Failed to fetch")) {
+      return "Audio unavailable — try again";
+    }
+    return "Audio unavailable";
   }
 
   /** e.g. 24432 → "twenty-four thousand four hundred thirty-two" */
@@ -64,7 +114,17 @@
     return rest ? `${head} ${speakNum(rest)}` : head;
   }
 
+  function petitionStatsFromDom() {
+    const raw = document.getElementById("sigNumber")?.textContent?.replace(/[^\d]/g, "");
+    if (!raw) return null;
+    const total = Number(raw);
+    if (!Number.isFinite(total) || total <= 0) return null;
+    return { total, goal: GOAL_DEFAULT };
+  }
+
   async function fetchPetitionStats() {
+    const fromDom = petitionStatsFromDom();
+    if (fromDom) return fromDom;
     try {
       const res = await fetch("/api/petition-count", { cache: "no-store" });
       if (res.ok) return await res.json();
@@ -73,8 +133,6 @@
       const res = await fetch("data/petition-count.json", { cache: "no-store" });
       if (res.ok) return await res.json();
     } catch (_) {}
-    const raw = document.getElementById("sigNumber")?.textContent?.replace(/[^\d]/g, "");
-    if (raw) return { total: Number(raw), goal: GOAL_DEFAULT };
     return null;
   }
 
@@ -166,7 +224,7 @@
     btn.classList.remove("is-playing", "is-loading");
     btn.setAttribute("aria-pressed", "false");
     btn.setAttribute("aria-busy", "false");
-    setLabel(ttsVoiceName ? `Listen (${ttsVoiceName})` : "Listen to our mission");
+    setLabel(IDLE_LABEL);
   }
 
   function stopPlayback() {
@@ -185,25 +243,33 @@
     resetUi();
   }
 
-  async function fetchChunkAudio(text) {
-    const res = await fetch("/api/tts", {
-      method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "audio/mpeg" },
-      body: JSON.stringify({ text }),
-    });
-    if (!res.ok) {
-      let detail = "";
-      try {
-        const err = await res.json();
-        detail = err.detail || err.error || "";
-      } catch (_) {}
-      throw new Error(detail || "audio_unavailable");
+  async function fetchChunkAudio(text, attempt = 0) {
+    try {
+      const res = await fetch("/api/tts", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "audio/mpeg" },
+        body: JSON.stringify({ text }),
+      });
+      if (!res.ok) {
+        let detail = "";
+        try {
+          const err = await res.json();
+          detail = err.detail || err.error || "";
+        } catch (_) {}
+        throw new Error(detail || "audio_unavailable");
+      }
+      const type = res.headers.get("Content-Type") || "";
+      if (!type.includes("audio")) {
+        throw new Error("audio_unavailable");
+      }
+      return res.blob();
+    } catch (err) {
+      if (attempt < 1) {
+        await new Promise((resolve) => window.setTimeout(resolve, 600));
+        return fetchChunkAudio(text, attempt + 1);
+      }
+      throw err;
     }
-    const type = res.headers.get("Content-Type") || "";
-    if (!type.includes("audio")) {
-      throw new Error("audio_unavailable");
-    }
-    return res.blob();
   }
 
   function prefetchChunk(index) {
@@ -227,17 +293,13 @@
   async function playChunkBlob(blob) {
     revokeUrl();
     objectUrl = URL.createObjectURL(blob);
-    if (!audio) {
-      audio = new Audio();
-      audio.preload = "auto";
-    }
-    audio.playbackRate = PLAYBACK_RATE;
-    audio.src = objectUrl;
+    const player = ensureAudio();
+    player.src = objectUrl;
 
     return new Promise((resolve, reject) => {
-      audio.onended = () => resolve();
-      audio.onerror = () => reject(new Error("playback_failed"));
-      audio.play().catch(reject);
+      player.onended = () => resolve();
+      player.onerror = () => reject(new Error("playback_failed"));
+      player.play().catch(reject);
     });
   }
 
@@ -268,11 +330,13 @@
       await playNextChunk();
     } catch (err) {
       stopPlayback();
-      showError(err?.message?.includes("Failed to fetch") ? "Audio unavailable — try again" : "Audio unavailable");
+      showError(formatPlaybackError(err));
     }
   }
 
   async function startPlayback() {
+    unlockAudioPlayback();
+
     if (playing && paused && audio) {
       paused = false;
       audio.playbackRate = PLAYBACK_RATE;
@@ -300,14 +364,14 @@
     setLabel("Loading…");
 
     try {
-      const stats = await fetchPetitionStats();
+      const stats = petitionStatsFromDom() || (await fetchPetitionStats());
       chunks = splitChunks(buildNarration(stats));
       clearPrefetch();
       prefetchAhead(0);
       await playNextChunk();
     } catch (err) {
       stopPlayback();
-      showError(err?.message?.includes("Failed to fetch") ? "Audio unavailable — try again" : "Audio unavailable");
+      showError(formatPlaybackError(err));
     }
   }
 
@@ -323,8 +387,7 @@
         return;
       }
       btn.hidden = false;
-      ttsVoiceName = cfg.voiceName || "Sarah";
-      setLabel(`Listen (${ttsVoiceName})`);
+      setLabel(IDLE_LABEL);
     } catch (_) {
       btn.hidden = true;
     }
