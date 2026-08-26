@@ -13,19 +13,23 @@
     { q: "call phone pastor clark", label: "Call Fr. James Clark (pastor)", href: "tel:+19017676949" },
     { q: "call bishop talley", label: "Call Bishop David Talley", href: "tel:+19013731200" },
     { q: "call chris fay catholic schools superintendent", label: "Call Dr. Chris Fay (superintendent)", href: "tel:+19013731221" },
+    { q: "darren mullis milestones legacy principal built", label: "His milestones — what he built", href: "#legacy" },
     { q: "story timeline what happened letter", label: "What is known (timeline)", href: "#story" },
     { q: "print one pager flyer", label: "Print the one-pager", href: "one-pager.html" },
+    { q: "protest photos gallery aug 21 demonstration", label: "Aug. 21 protest photos", href: "gallery.html" },
   ];
 
   if (menuToggle && topbar) {
     menuToggle.addEventListener("click", () => {
       const open = topbar.classList.toggle("open");
       menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      document.body.classList.toggle("nav-open", open);
     });
     topbar.querySelectorAll(".nav-left a").forEach((a) => {
       a.addEventListener("click", () => {
         topbar.classList.remove("open");
         menuToggle.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("nav-open");
       });
     });
   }
@@ -40,6 +44,7 @@
       e.preventDefault();
       topbar?.classList.remove("open");
       menuToggle?.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("nav-open");
       goSearch();
     });
   }
@@ -155,29 +160,95 @@
   const THANKS =
     "You’re on the list. When we hit 25,000 signatures, we’ll reach out to plan the gathering within 30 days. Opening the petition now — sign if you haven’t.";
 
+  function encodeForm(form) {
+    return new URLSearchParams(new FormData(form)).toString();
+  }
+
+  async function submitNetlifyForm(form) {
+    const res = await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encodeForm(form),
+    });
+    if (!res.ok) throw new Error("form_failed");
+  }
+
+  async function sendWelcomeEmailNow(email, emailOk) {
+    if (!email || !emailOk) return { ok: false, skipped: true };
+    const payload = JSON.stringify({ email, email_ok: true });
+    const tryOnce = () =>
+      fetch("/api/welcome-send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: payload,
+        keepalive: true,
+      }).then(async (res) => {
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok || data.ok === false) {
+          const err = new Error(data.error || "welcome_failed");
+          err.data = data;
+          throw err;
+        }
+        return data;
+      });
+
+    try {
+      return await tryOnce();
+    } catch (first) {
+      console.warn("welcome-send retry", first && first.message);
+      try {
+        return await tryOnce();
+      } catch (second) {
+        console.error("welcome-send failed", second && second.message, second && second.data);
+        return { ok: false, error: String(second && second.message ? second.message : second) };
+      }
+    }
+  }
+
   function wireMobilize(form, msgEl) {
     if (!form) return;
-    form.addEventListener("submit", (e) => {
-      // Local preview: keep the contact in the browser and send people to Change.org.
-      // On Netlify deploy, remove preventDefault so data-netlify can capture the list.
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const btn = form.querySelector('[type="submit"]');
+      if (btn) btn.disabled = true;
+      if (msgEl) msgEl.textContent = "Saving…";
+
       const host = location.hostname;
       const isLocal = host === "127.0.0.1" || host === "localhost";
-      if (isLocal) {
-        e.preventDefault();
-        try {
-          const data = Object.fromEntries(new FormData(form).entries());
-          const key = "rfb_mobilize";
-          const prev = JSON.parse(localStorage.getItem(key) || "[]");
-          prev.push({ ...data, at: new Date().toISOString() });
-          localStorage.setItem(key, JSON.stringify(prev));
-        } catch (_) {}
+
+      // Snapshot email for a client-side welcome attempt (webhook is the reliable backup)
+      const email = (form.querySelector('[name="email"]')?.value || "").trim();
+      const emailOkEl = form.querySelector('[name="email_ok"]');
+      const emailOk = emailOkEl ? emailOkEl.checked : true;
+
+      try {
+        if (isLocal) {
+          try {
+            const data = Object.fromEntries(new FormData(form).entries());
+            const key = "rfb_mobilize";
+            const prev = JSON.parse(localStorage.getItem(key) || "[]");
+            prev.push({ ...data, at: new Date().toISOString() });
+            localStorage.setItem(key, JSON.stringify(prev));
+          } catch (_) {}
+        } else {
+          // Save to Netlify Forms first — site hook also POSTs to /api/welcome-send
+          await submitNetlifyForm(form);
+          // Client attempt (fast path); hook covers misses / Safari quirks
+          void sendWelcomeEmailNow(email, emailOk);
+        }
+
         if (msgEl) msgEl.textContent = THANKS;
         window.open(PETITION, "_blank", "noopener");
         form.reset();
-        const emailOk = form.querySelector('[name="email_ok"]');
-        if (emailOk) emailOk.checked = true;
-      } else if (msgEl) {
-        msgEl.textContent = THANKS;
+        const emailOkReset = form.querySelector('[name="email_ok"]');
+        if (emailOkReset) emailOkReset.checked = true;
+      } catch (_) {
+        if (msgEl) {
+          msgEl.textContent =
+            "Something went wrong saving your info. Please try again, or email us after you sign the petition.";
+        }
+      } finally {
+        if (btn) btn.disabled = false;
       }
     });
   }
@@ -229,4 +300,18 @@
       }
     });
   })();
+
+  const localBar = document.getElementById("localPreviewBar");
+  const host = location.hostname;
+  const isLocal = host === "127.0.0.1" || host === "localhost";
+  if (localBar && isLocal) {
+    localBar.hidden = false;
+    localBar.classList.add("is-visible");
+  } else if (!isLocal && host.includes("holyrosaryfightsback")) {
+    const warn = document.createElement("div");
+    warn.className = "local-preview-bar is-visible";
+    warn.innerHTML =
+      '<span>Live site</span><span class="local-preview-build">Photo updates are local only — open <a href="http://127.0.0.1:5173/#legacy" style="color:inherit;text-decoration:underline">127.0.0.1:5173</a></span>';
+    document.body.prepend(warn);
+  }
 })();

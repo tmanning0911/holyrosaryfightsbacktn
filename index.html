@@ -34,7 +34,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Pacifico&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="home-uwd.css?v=29" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta name="site-build" content="20260826h" />
+  <link rel="stylesheet" href="home-uwd.css?v=55" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -99,6 +101,12 @@
   </script>
 </head>
 <body>
+  <div class="local-preview-bar" id="localPreviewBar" hidden>
+    <span>Local preview</span>
+    <span class="local-preview-build" id="localPreviewBuild">build 2026-08-26i</span>
+    <a href="#legacy">Milestones</a>
+    <a href="#press">Press</a>
+  </div>
   <a class="skip" href="#content">Skip to content</a>
 
   <header class="topbar" id="topbar">
@@ -108,7 +116,10 @@
         <a href="#top">Home</a>
         <a href="#help">Start here</a>
         <a href="#phones">Call them</a>
+        <a href="#legacy">His milestones</a>
         <a href="#story">The story</a>
+        <a href="#gallery">Photos</a>
+        <a href="#press">Press</a>
         <a href="#help" class="nav-search-mobile" id="navSearchMobile">Search</a>
       </nav>
       <a class="logo" href="#top" aria-label="Rams Fight Back home">
@@ -144,6 +155,14 @@
       <div class="hero-copy">
         <h1>We Are <span class="script">Rams!</span></h1>
         <p class="deck"><strong>Rams Fight Back</strong> — standing with Principal <strong>Darren Mullis</strong>, asking the pastor and the Bishop of Memphis to restore him.</p>
+        <div class="hero-actions">
+          <button class="hero-pill hero-pill--gold mission-listen" id="missionListen" type="button" hidden aria-pressed="false">
+            <span class="hero-pill-title mission-listen-label">Listen to our mission</span>
+          </button>
+          <a class="hero-pill hero-pill--ghost" href="#legacy">
+            <span class="hero-pill-title">His milestones</span>
+          </a>
+        </div>
       </div>
       <form class="join-card" id="joinForm" name="mobilize" method="POST" data-netlify="true" netlify-honeypot="bot-field">
         <input type="hidden" name="form-name" value="mobilize" />
@@ -254,6 +273,60 @@
     </section>
     <div class="edge" aria-hidden="true"><img src="img/uwd-style/border-top-orange.svg" alt="" /></div>
 
+    <section class="watermark-section" id="legacy" aria-labelledby="legacyTitle">
+      <p class="watermark" aria-hidden="true">His Record</p>
+      <h2 class="section-title" id="legacyTitle">What he built at Holy Rosary</h2>
+      <p class="legacy-lede">
+        Darren Mullis has been principal since 2003. Families know what he built here.
+      </p>
+      <ol class="legacy-timeline" id="legacyTimeline">
+        <li class="legacy-milestone">
+          <div class="legacy-milestone-marker" aria-hidden="true"><span>1</span></div>
+          <article class="legacy-milestone-card">
+            <p class="legacy-milestone-tag">Since 2003</p>
+            <h3 class="legacy-milestone-title">Named principal in 2003</h3>
+            <p class="legacy-milestone-body">Twenty-three years in the job. He did not come from outside — he had already walked these halls as a student.</p>
+          </article>
+        </li>
+        <li class="legacy-milestone">
+          <div class="legacy-milestone-marker" aria-hidden="true"><span>2</span></div>
+          <article class="legacy-milestone-card">
+            <p class="legacy-milestone-tag">Roots</p>
+            <h3 class="legacy-milestone-title">Raised in this parish</h3>
+            <p class="legacy-milestone-body">Holy Rosary, first through eighth grade. Christian Brothers, class of 1986. He returned as youth director, then director of religious education, then teacher. Master's from Memphis Theological Seminary. Leadership Academy through the diocese.</p>
+          </article>
+        </li>
+        <li class="legacy-milestone">
+          <div class="legacy-milestone-marker" aria-hidden="true"><span>3</span></div>
+          <article class="legacy-milestone-card">
+            <p class="legacy-milestone-tag">The school today</p>
+            <h3 class="legacy-milestone-title">About 450 students, PK through eighth</h3>
+            <p class="legacy-milestone-body">Families from East Memphis and across West Tennessee. A parish school on Park Avenue since 1954.</p>
+          </article>
+        </li>
+        <li class="legacy-milestone">
+          <div class="legacy-milestone-marker" aria-hidden="true"><span>4</span></div>
+          <article class="legacy-milestone-card">
+            <p class="legacy-milestone-tag">Programs</p>
+            <h3 class="legacy-milestone-title">What the school runs</h3>
+            <p class="legacy-milestone-body">Twelve sports. Spanish, French, and Latin. Extended day and summer programs. The Learning Center and the ANGEL Program for students who need extra support.</p>
+          </article>
+        </li>
+        <li class="legacy-milestone">
+          <div class="legacy-milestone-marker" aria-hidden="true"><span>5</span></div>
+          <article class="legacy-milestone-card">
+            <p class="legacy-milestone-tag">How he led</p>
+            <h3 class="legacy-milestone-title">Letters home, every week</h3>
+            <p class="legacy-milestone-body">He wrote to parents each week. He helped start middle school youth ministry. When something new was proposed, he asked whether it served all of God's children and followed the example of Jesus Christ.</p>
+          </article>
+        </li>
+      </ol>
+      <p class="legacy-foot">
+        Parents who signed the petition call him a familiar face — someone their children knew by name.
+        <a href="https://c.org/2LMccZY9dk" target="_blank" rel="noopener">Sign if that matches what you saw →</a>
+      </p>
+    </section>
+
     <section class="watermark-section" id="action">
       <p class="watermark" aria-hidden="true">Create Meaningful Change</p>
       <h2 class="section-title">Take action with us</h2>
@@ -317,7 +390,7 @@
           </div>
         </a>
         <a class="news-card photo-card" href="https://c.org/2LMccZY9dk" target="_blank" rel="noopener">
-          <img src="img/petition-banner.jpg" alt="Change.org petition to reinstate Darren Mullis" width="800" height="450" />
+          <img src="img/petition-news-graphic.jpg" alt="Petition on Change.org" width="800" height="450" />
           <div class="photo-body">
             <span class="tag">Petition · Change.org</span>
             <h3>Sign to restore Principal Darren Mullis at Holy Rosary Catholic School.</h3>
@@ -325,6 +398,49 @@
           </div>
         </a>
       </div>
+    </section>
+
+    <section class="watermark-section" id="press">
+      <p class="watermark" aria-hidden="true">From Rams Fight Back</p>
+      <h2 class="section-title">Press releases</h2>
+      <p class="press-section-lede">Official statement issued to Memphis media on August 25, 2026.</p>
+      <article class="press-release-card shell">
+        <span class="tag">Issued to media · Aug 25, 2026</span>
+        <h3>20,000 sign Change.org petition to reinstate Holy Rosary principal Darren Mullis</h3>
+        <p class="press-release-summary">Families protested Aug. 21 after a departure letter offered no public explanation. The document sent to reporters with the campaign PDF.</p>
+        <div class="press-release-actions">
+          <a class="btn-pill btn-navy" href="press-release.html">Read release</a>
+          <a class="btn-pill btn-gold" href="releases/rams-fight-back-press-release-20000-signatures.pdf" download>Download PDF</a>
+        </div>
+      </article>
+    </section>
+
+    <section class="watermark-section" id="gallery">
+      <p class="watermark" aria-hidden="true">Aug. 21 · Memphis</p>
+      <h2 class="section-title">Aug. 21 protest photos</h2>
+      <p class="gallery-teaser">
+        Families gathered at the Catholic Diocese of Memphis the day after Holy Rosary announced Darren Mullis would depart.
+        These are the published news photos — credited to the photographers and outlets.
+      </p>
+      <div class="gallery-preview">
+        <figure>
+          <img src="img/gallery/dm-protest-aug21.jpg?v=20260826f" alt="Holy Rosary supporters gather outside the Catholic Diocese of Memphis" width="800" height="533" loading="lazy" />
+          <figcaption>
+            Parents, alumni, and supporters at the Catholic Center.
+            <span class="credit">Mark Weber / The Daily Memphian</span>
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="img/gallery/wreg-reinstate-mullis.jpg?v=20260826f" alt="Protest sign asking to reinstate Mr. Mullis after a lifetime of service" width="800" height="533" loading="lazy" />
+          <figcaption>
+            Parent sign asking to reinstate Mr. Mullis.
+            <span class="credit">WREG News 3</span>
+          </figcaption>
+        </figure>
+      </div>
+      <p style="text-align:center;position:relative;z-index:1">
+        <a class="gallery-teaser-link" href="gallery.html">View full gallery with credits →</a>
+      </p>
     </section>
 
     <section class="donate-band" id="share">
@@ -350,13 +466,13 @@
       </div>
     </section>
 
-    <section class="watermark-section" id="phones" style="padding-top:3rem;padding-bottom:2rem">
+    <section class="watermark-section phones-section" id="phones">
       <p class="watermark" aria-hidden="true">The Offices</p>
       <h2 class="section-title">Call them</h2>
-      <p class="shell" style="position:relative;z-index:1;text-align:center;font-weight:600;max-width:40rem;margin:0 auto 1.5rem">
+      <p class="shell phones-lede">
         These are the public offices that govern this parish school. We name the office. We ask, with reverence, that Darren Mullis be restored.
       </p>
-      <div class="news-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+      <div class="news-grid phones-grid">
         <article class="news-card person-card">
           <img src="img/fr-james-clark.png" alt="Very Rev. James M. Clark" width="400" height="400" />
           <div class="person-body">
@@ -404,13 +520,18 @@
       <div>
         <h3>Quick links</h3>
         <ul class="quick-links">
-          <li><a href="https://c.org/2LMccZY9dk" target="_blank" rel="noopener">Sign the petition</a></li>
+          <li><a href="/ramsfightback" target="_blank" rel="noopener">Sign the petition</a></li>
+          <li><a href="#top">Join the call</a></li>
+          <li><a href="#involved">Get involved</a></li>
+          <li><a href="#action">Take action &amp; share</a></li>
           <li><a href="#phones">Call the offices</a></li>
-          <li><a href="#share">Share the petition</a></li>
+          <li><a href="#share">The $1M gift</a></li>
+          <li><a href="#legacy">His milestones</a></li>
           <li><a href="#story">What is known</a></li>
-          <li><a href="one-pager.html">Print one-pager</a></li>
-          <li><a href="petition.html">Petition page</a></li>
-          <li><a href="/pastor">Who is the pastor?</a></li>
+          <li><a href="#news">Latest news</a></li>
+          <li><a href="press-release.html">Press release</a></li>
+          <li><a href="gallery.html">Protest photos</a></li>
+          <li><a href="one-pager.html">Print the flyer</a></li>
           <li><a href="mailto:hrpastor@holyrosarymemphis.org">Write the pastor</a></li>
           <li><button type="button" class="media-open linkish" id="mediaOpen">Media inquiry</button></li>
         </ul>
@@ -484,6 +605,7 @@
     </div>
   </div>
 
-  <script src="home.js"></script>
+  <script src="home-accessibility.js?v=14" defer></script>
+  <script src="home.js?v=7"></script>
 </body>
 </html>
