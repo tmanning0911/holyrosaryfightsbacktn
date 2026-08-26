@@ -307,11 +307,5 @@
   if (localBar && isLocal) {
     localBar.hidden = false;
     localBar.classList.add("is-visible");
-  } else if (!isLocal && host.includes("holyrosaryfightsback")) {
-    const warn = document.createElement("div");
-    warn.className = "local-preview-bar is-visible";
-    warn.innerHTML =
-      '<span>Live site</span><span class="local-preview-build">Photo updates are local only — open <a href="http://127.0.0.1:5173/#legacy" style="color:inherit;text-decoration:underline">127.0.0.1:5173</a></span>';
-    document.body.prepend(warn);
   }
 })();
