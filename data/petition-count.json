@@ -1,9 +1,11 @@
 {
-  "total": 17191,
-  "displayed": 17191,
+  "total": 24932,
+  "displayed": 24932,
   "goal": 25000,
-  "updatedAt": "2026-08-25T16:32:37Z",
+  "updatedAt": "2026-08-26T20:39:34Z",
   "source": "change.org",
   "error": null,
-  "petitionUrl": "https://c.org/2LMccZY9dk"
+  "petitionUrl": "https://c.org/2LMccZY9dk",
+  "daily": 6679,
+  "weekly": 23441
 }

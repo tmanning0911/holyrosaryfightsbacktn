@@ -7,16 +7,25 @@ const { getFeed, json } = require("../lib/changeorg");
 exports.handler = async function () {
   try {
     const data = await getFeed({ force: true });
+    let milestone = { triggered: false };
+    try {
+      const { maybeNotifyPressReleaseMilestone } = require("../lib/press-release-milestone");
+      milestone = await maybeNotifyPressReleaseMilestone(data);
+    } catch (err) {
+      milestone = { triggered: false, error: String(err && err.message ? err.message : err) };
+    }
     return json(
       200,
       {
         ok: true,
         scheduled: true,
         total: data.total,
+        displayed: data.displayed,
         signers: Array.isArray(data.signers) ? data.signers.length : 0,
         fetchedAt: data.fetchedAt,
         blobSaved: Boolean(data.blobSaved),
         cacheLayer: data.cacheLayer,
+        pressReleaseMilestone: milestone,
       },
       { force: true }
     );

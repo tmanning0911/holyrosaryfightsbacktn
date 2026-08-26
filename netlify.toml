@@ -5,7 +5,7 @@
 
 [functions]
   node_bundler = "esbuild"
-  included_files = ["netlify/lib/**"]
+  included_files = ["netlify/lib/**", "email-previews/welcome.html", "email-previews/press-release-media-pitch.html"]
   external_node_modules = ["@netlify/blobs"]
 
 [functions."petition-refresh"]
@@ -28,6 +28,21 @@
   status = 200
 
 [[redirects]]
+  from = "/api/welcome-send"
+  to = "/.netlify/functions/welcome-send"
+  status = 200
+
+[[redirects]]
+  from = "/api/tts"
+  to = "/.netlify/functions/tts"
+  status = 200
+
+[[redirects]]
+  from = "/api/resend-inbound"
+  to = "/.netlify/functions/resend-inbound"
+  status = 200
+
+[[redirects]]
   from = "/pastor"
   to = "/clark.html"
   status = 200
@@ -41,6 +56,24 @@
   from = "/clark"
   to = "/clark.html"
   status = 301
+
+[[redirects]]
+  from = "/ramsfightback"
+  to = "https://c.org/2LMccZY9dk"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/ramsfightback/"
+  to = "https://c.org/2LMccZY9dk"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/sign"
+  to = "https://c.org/2LMccZY9dk"
+  status = 302
+  force = true
 
 [[headers]]
   for = "/*"

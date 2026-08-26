@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Resend setup — holyrosaryfightsbacktn.com</title>
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root { --navy:#002269; --gold:#ffc72a; --cream:#f6f3ea; --ink:#151210; --muted:#3f3a32; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:Montserrat,Arial,sans-serif; background:var(--cream); color:var(--ink); line-height:1.5; }
+    .top { background:var(--navy); border-bottom:4px solid var(--gold); padding:1.1rem 1.25rem; color:#fff; }
+    .top a { color:var(--gold); font-weight:800; text-decoration:none; font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase; }
+    .shell { max-width:720px; margin:0 auto; padding:1.5rem 1.15rem 3rem; }
+    h1 { margin:0 0 0.5rem; font-size:1.5rem; color:var(--navy); }
+    h2 { margin:1.75rem 0 0.65rem; font-size:1.05rem; color:var(--navy); }
+    p, li { font-weight:600; color:var(--muted); }
+    code, .box { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size:0.85em; }
+    .box { display:block; background:#fff; border:2px solid var(--navy); border-radius:10px; padding:0.85rem 1rem; margin:0.75rem 0; color:var(--ink); word-break:break-all; }
+    .pill { display:inline-block; background:var(--navy); color:var(--gold); font-size:0.68rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:800; padding:0.3rem 0.6rem; border-radius:999px; }
+    ol { padding-left:1.25rem; }
+    li { margin:0.45rem 0; }
+    table { width:100%; border-collapse:collapse; margin:0.75rem 0; background:#fff; }
+    th, td { border:1px solid #d8dce6; padding:0.65rem 0.75rem; text-align:left; font-size:0.85rem; }
+    th { background:var(--navy); color:#fff; }
+    .warn { background:#fff8e6; border-left:4px solid var(--gold); padding:0.75rem 1rem; border-radius:0 8px 8px 0; }
+  </style>
+</head>
+<body>
+  <div class="top">
+    <a href="index.html">← Inbox preview</a>
+  </div>
+  <div class="shell">
+    <span class="pill">Resend · Netlify DNS</span>
+    <h1>Email — send &amp; receive on holyrosaryfightsbacktn.com</h1>
+    <p>
+      Domain DNS is on <strong>Netlify / NS1</strong> (<code>dns*.p09.nsone.net</code>).
+      Add the domain in Resend, then paste the records Resend shows into Netlify DNS.
+    </p>
+
+    <div class="warn">
+      <strong>Send from:</strong>
+      <span class="box">Rams Fight Back &lt;hello@holyrosaryfightsbacktn.com&gt;</span>
+      <strong style="display:block;margin-top:0.75rem;">Receive at:</strong>
+      <span class="box">hello@holyrosaryfightsbacktn.com → forwarded to your Gmail</span>
+      Resend is not a full inbox — inbound mail hits a webhook and gets forwarded as a notification.
+    </div>
+
+    <h2>1. Add the domain in Resend</h2>
+    <ol>
+      <li>Open <a href="https://resend.com/domains" target="_blank" rel="noopener">resend.com/domains</a> and sign in.</li>
+      <li>Click <strong>Add Domain</strong>.</li>
+      <li>Enter <code>holyrosaryfightsbacktn.com</code> (root domain — required for <code>noreply@…</code>).</li>
+      <li>Region: pick closest to US recipients (e.g. <strong>us-east-1</strong>).</li>
+      <li>Open the domain’s <strong>DNS Records</strong> tab and leave it open — you’ll copy three records.</li>
+    </ol>
+
+    <h2>2. Add DNS in Netlify</h2>
+    <p>
+      Netlify → Site → <strong>Domain management</strong> → <strong>holyrosaryfightsbacktn.com</strong> → <strong>DNS</strong>
+      (or <a href="https://app.netlify.com/projects/holyrosaryfightsbacktn/domain-management" target="_blank" rel="noopener">Domain management</a>).
+    </p>
+    <p>Resend will show values like this (copy <em>exactly</em> from your dashboard — do not invent):</p>
+    <table>
+      <thead>
+        <tr><th>Type</th><th>Name (host)</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>MX</td>
+          <td><code>send</code></td>
+          <td>Resend’s <code>feedback-smtp.…amazonses.com</code> · Priority <strong>10</strong></td>
+        </tr>
+        <tr>
+          <td>TXT</td>
+          <td><code>send</code></td>
+          <td><code>v=spf1 include:amazonses.com ~all</code> (or whatever Resend shows)</td>
+        </tr>
+        <tr>
+          <td>TXT</td>
+          <td><code>resend._domainkey</code></td>
+          <td>Long <code>p=…</code> public key from Resend</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      In Netlify, use only the short host names above (<code>send</code>, <code>resend._domainkey</code>) —
+      do <strong>not</strong> paste the full <code>send.holyrosaryfightsbacktn.com</code> into the name field.
+    </p>
+
+    <h2>3. Verify</h2>
+    <ol>
+      <li>Back in Resend → click <strong>Verify DNS Records</strong>.</li>
+      <li>Usually verifies within 15 minutes (can take longer).</li>
+      <li>Optional check: <a href="https://dns.email/" target="_blank" rel="noopener">dns.email</a></li>
+    </ol>
+
+    <h2>4. API key for sending</h2>
+    <ol>
+      <li>Resend → <strong>API Keys</strong> → create a key (Sending access).</li>
+      <li>In Netlify → Site settings → <strong>Environment variables</strong> add:</li>
+    </ol>
+    <span class="box">RESEND_API_KEY=re_••••••••</span>
+    <span class="box">RESEND_FROM=Rams Fight Back &lt;hello@holyrosaryfightsbacktn.com&gt;</span>
+    <span class="box">RESEND_REPLY_TO=hello@holyrosaryfightsbacktn.com</span>
+    <p>
+      Mobilize signup calls <code>POST /api/welcome-send</code> after the Netlify Form saves.
+      Domain must show <strong>Verified</strong> in Resend.
+    </p>
+
+    <h2>Optional: DMARC (after verified)</h2>
+    <p>TXT on <code>_dmarc</code> (already live as <code>p=none</code>):</p>
+    <span class="box">v=DMARC1; p=none;</span>
+    <p>Start with <code>p=none</code>, tighten later.</p>
+
+    <h2>5. Receive mail at hello@ (press replies)</h2>
+    <ol>
+      <li>Resend → domain → <strong>Receiving</strong> → enable.</li>
+      <li>Add the <strong>root MX</strong> record Resend shows in Netlify DNS (host <code>@</code> — separate from the <code>rsend</code> send record).</li>
+      <li>Resend → <strong>Webhooks</strong> → endpoint <code>https://holyrosaryfightsbacktn.com/api/resend-inbound</code>, event <code>email.received</code>.</li>
+      <li>Netlify env: <code>RESEND_WEBHOOK_SECRET</code>, <code>INBOUND_FORWARD_TO=taylormanning33@gmail.com</code>.</li>
+      <li>Deploy, then test by emailing <code>hello@holyrosaryfightsbacktn.com</code>.</li>
+    </ol>
+    <p>Or run <code>node scripts/setup-resend-inbound-webhook.js</code> locally (needs <code>RESEND_API_KEY</code> in <code>.env</code>).</p>
+
+    <p style="margin-top:2rem"><a href="index.html">← Back to inbox preview</a></p>
+  </div>
+</body>
+</html>

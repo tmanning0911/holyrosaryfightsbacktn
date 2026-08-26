@@ -1,0 +1,67 @@
+{
+  "updated": "2026-08-26",
+  "event": "Aug. 21, 2026",
+  "note": "Photos pulled from published news coverage. We credit photographers and outlets. We do not claim ownership of copyrighted news images.",
+  "photos": [
+    {
+      "id": "dm-protest",
+      "src": "img/gallery/dm-protest-aug21.jpg",
+      "alt": "Holy Rosary parents and alumni gather outside the Catholic Diocese of Memphis on Aug. 21, 2026",
+      "caption": "Parents, alumni, and supporters at the Catholic Diocese of Memphis",
+      "outlet": "The Daily Memphian",
+      "credit": "Mark Weber",
+      "date": "Aug. 21, 2026",
+      "sourceUrl": "https://dailymemphian.com/article/65892/holy-rosary-principal-exit-families-protest-catholic-diocese"
+    },
+    {
+      "id": "wreg-parents-alumni",
+      "src": "img/gallery/wreg-parents-alumni.jpg",
+      "alt": "Holy Rosary parents and alumni hold Parent and Alumni signs at the demonstration",
+      "caption": "Parent and Alumni signs at the demonstration",
+      "outlet": "WREG News 3",
+      "credit": "WREG News 3",
+      "date": "Aug. 21, 2026",
+      "sourceUrl": "https://wreg.com/news/local/parents-protest-dismissal-of-holy-rosary-principal/"
+    },
+    {
+      "id": "wreg-reinstate",
+      "src": "img/gallery/wreg-reinstate-mullis.jpg",
+      "alt": "Protest sign: For a lifetime of faithful service — reinstate Mr. Mullis",
+      "caption": "Sign asking to reinstate Mr. Mullis after a lifetime of service",
+      "outlet": "WREG News 3",
+      "credit": "WREG News 3",
+      "date": "Aug. 21, 2026",
+      "sourceUrl": "https://wreg.com/news/local/parents-protest-dismissal-of-holy-rosary-principal/"
+    },
+    {
+      "id": "wreg-bring-back",
+      "src": "img/gallery/wreg-bring-mullis-back.jpg",
+      "alt": "Holy Rosary parent holds a Bring Mullis Back sign",
+      "caption": "Bring Mullis Back sign at the Aug. 21 protest",
+      "outlet": "WREG News 3",
+      "credit": "WREG News 3",
+      "date": "Aug. 21, 2026",
+      "sourceUrl": "https://wreg.com/news/local/parents-protest-dismissal-of-holy-rosary-principal/"
+    },
+    {
+      "id": "wreg-diocese",
+      "src": "img/gallery/wreg-diocese-sign.jpg",
+      "alt": "Families gather at the Catholic Center sign during the Aug. 21 protest",
+      "caption": "Families at the Catholic Center sign",
+      "outlet": "WREG News 3",
+      "credit": "WREG News 3",
+      "date": "Aug. 21, 2026",
+      "sourceUrl": "https://wreg.com/news/local/parents-protest-dismissal-of-holy-rosary-principal/"
+    },
+    {
+      "id": "wreg-rams",
+      "src": "img/gallery/wreg-rams-parents.jpg",
+      "alt": "Holy Rosary parents hold Rams and Parent signs at the demonstration",
+      "caption": "Rams and Parent signs outside the Catholic Center",
+      "outlet": "WREG News 3",
+      "credit": "WREG News 3",
+      "date": "Aug. 21, 2026",
+      "sourceUrl": "https://wreg.com/news/local/parents-protest-dismissal-of-holy-rosary-principal/"
+    }
+  ]
+}

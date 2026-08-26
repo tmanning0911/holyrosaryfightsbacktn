@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Inbox preview — Welcome email</title>
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy: #002269;
+      --gold: #ffc72a;
+      --cream: #f6f3ea;
+      --ink: #151210;
+      --muted: #5f6368;
+      --line: #e0e3e8;
+      --bg: #f0f2f5;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Montserrat", Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    .chrome {
+      background: var(--navy);
+      border-bottom: 4px solid var(--gold);
+      padding: 0.85rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .chrome-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+    }
+    .chrome-brand img { width: 40px; height: auto; }
+    .chrome a {
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+    }
+    .shell {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 3rem;
+    }
+    .list-label {
+      margin: 0 0 0.65rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--muted);
+    }
+    /* Inbox row (how it looks in the list) */
+    .inbox-row {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px 12px 0 0;
+      padding: 0.95rem 1.15rem 1rem;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+      cursor: default;
+    }
+    .inbox-row .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: baseline;
+      margin-bottom: 0.35rem;
+    }
+    .inbox-row .from-name {
+      font-weight: 800;
+      font-size: 0.92rem;
+      color: var(--ink);
+    }
+    .inbox-row .when {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .inbox-row .subj {
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--ink);
+      margin: 0 0 0.2rem;
+    }
+    .inbox-row .snippet {
+      margin: 0;
+      font-size: 0.88rem;
+      color: var(--muted);
+      font-weight: 600;
+      line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .inbox-row .snippet strong {
+      color: #3c4043;
+      font-weight: 700;
+    }
+
+    /* Opened message chrome */
+    .message {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-top: none;
+      border-radius: 0 0 12px 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(0, 34, 105, 0.08);
+    }
+    .message-head {
+      padding: 1.35rem 1.35rem 1.1rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .message-head h1 {
+      margin: 0 0 1rem;
+      font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+      font-weight: 900;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+    .party {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 0.75rem;
+      align-items: start;
+    }
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 2px solid var(--gold);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .avatar img { width: 36px; height: auto; }
+    .party-meta { min-width: 0; }
+    .party-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 0.75rem;
+      align-items: baseline;
+      margin: 0 0 0.25rem;
+      font-size: 0.88rem;
+    }
+    .party-line .who { font-weight: 800; }
+    .party-line .addr {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.8rem;
+      word-break: break-all;
+    }
+    .party-line .lbl {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      min-width: 2.5rem;
+    }
+    .preheader-callout {
+      margin-top: 1rem;
+      padding: 0.75rem 0.9rem;
+      background: #f8f9fa;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.82rem;
+      line-height: 1.45;
+      color: #3c4043;
+      font-weight: 600;
+    }
+    .preheader-callout span {
+      display: block;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--navy);
+      font-weight: 800;
+      margin-bottom: 0.3rem;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.85rem 1.15rem;
+      border-bottom: 1px solid var(--line);
+      background: #fafbfc;
+    }
+    .toolbar a, .toolbar button {
+      font: inherit;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--navy);
+      background: #fff;
+      border: 2px solid var(--navy);
+      border-radius: 999px;
+      padding: 0.45rem 0.9rem;
+      cursor: pointer;
+    }
+    .toolbar a.primary, .toolbar button.primary {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+    .toolbar button.is-on {
+      background: var(--navy);
+      color: #fff;
+      border-color: var(--navy);
+    }
+    .theme-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.15rem;
+      border-bottom: 1px solid var(--line);
+      background: #fafbfc;
+    }
+    .theme-row span {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-right: 0.25rem;
+    }
+    .message-body {
+      background: #e8ecf2;
+      padding: 0;
+    }
+    .message-body iframe {
+      display: block;
+      width: 100%;
+      min-height: 2400px;
+      border: 0;
+      background: transparent;
+    }
+    .note {
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .note code {
+      font-size: 0.85em;
+      background: #fff;
+      padding: 0.1rem 0.35rem;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+    }
+    .note a { color: var(--navy); font-weight: 800; }
+  </style>
+</head>
+<body>
+  <div class="chrome">
+    <div class="chrome-brand">
+      <img src="../img/ram-fight-back-logo.png" width="40" height="29" alt="" />
+      <span>Local send preview</span>
+    </div>
+    <a href="welcome.html">Raw HTML only</a>
+  </div>
+
+  <div class="shell">
+    <p class="list-label">How it looks in the inbox list</p>
+    <div class="inbox-row" aria-label="Inbox list row">
+      <div class="meta">
+        <div class="from-name">Rams Fight Back</div>
+        <div class="when">Just now</div>
+      </div>
+      <p class="subj" id="listSubj">You’re on the Rams Fight Back list — next, sign if you haven’t</p>
+      <p class="snippet">
+        <strong id="listPre">Loading preview…</strong>
+      </p>
+    </div>
+
+    <div class="message" aria-label="Opened email">
+      <div class="toolbar">
+        <a class="primary" id="openAlone" href="welcome.html?theme=light" target="_blank" rel="noopener">Open body alone</a>
+        <a href="../">Back to site</a>
+        <a href="welcome-campaign.html" target="_blank" rel="noopener">Campaign layout</a>
+      </div>
+      <div class="theme-row" role="group" aria-label="Email color theme">
+        <span>Email theme</span>
+        <button type="button" id="themeLight" class="is-on">Light</button>
+        <button type="button" id="themeDark">Dark</button>
+      </div>
+      <div class="message-head">
+        <h1 id="openSubj">You’re on the Rams Fight Back list — next, sign if you haven’t</h1>
+        <div class="party">
+          <div class="avatar" aria-hidden="true">
+            <img src="../img/ram-fight-back-logo.png" width="36" height="26" alt="" />
+          </div>
+          <div class="party-meta">
+            <p class="party-line">
+              <span class="who">Rams Fight Back</span>
+              <span class="addr">&lt;hello@holyrosaryfightsbacktn.com&gt;</span>
+            </p>
+            <p class="party-line">
+              <span class="lbl">To</span>
+              <span class="addr">you@example.com</span>
+            </p>
+            <p class="party-line">
+              <span class="lbl">Reply</span>
+              <span class="addr">hello@holyrosaryfightsbacktn.com</span>
+            </p>
+            <div class="preheader-callout">
+              <span>Preview text (preheader)</span>
+              <div id="openPre">Loading…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="message-body">
+        <iframe id="bodyFrame" title="Welcome email body" src="welcome.html?theme=light"></iframe>
+      </div>
+    </div>
+
+    <p class="note">
+      Full campaign welcome with <strong>light + dark</strong> styles. From: <code>hello@holyrosaryfightsbacktn.com</code>.
+      Archive copy: <a href="welcome-campaign.html">welcome-campaign.html</a>.
+    </p>
+  </div>
+
+  <script>
+    (function () {
+      var SUBJECT = "You’re on the Rams Fight Back list — next, sign if you haven’t";
+      var FALLBACK_PRE = "Rams have signed for Darren. Parent, alum, friend — if you stand with him, you’re a Ram.";
+      var theme = "light";
+      var frame = document.getElementById("bodyFrame");
+      var btnLight = document.getElementById("themeLight");
+      var btnDark = document.getElementById("themeDark");
+      var openAlone = document.getElementById("openAlone");
+
+      function setPre(text) {
+        document.getElementById("listPre").textContent = text;
+        document.getElementById("openPre").textContent = text;
+      }
+
+      function applyTheme(next) {
+        theme = next === "dark" ? "dark" : "light";
+        frame.src = "welcome.html?theme=" + theme;
+        openAlone.href = "welcome.html?theme=" + theme;
+        btnLight.classList.toggle("is-on", theme === "light");
+        btnDark.classList.toggle("is-on", theme === "dark");
+        document.querySelector(".message-body").style.background =
+          theme === "dark" ? "#0e1117" : "#e8ecf2";
+      }
+
+      function fitFrame() {
+        try {
+          var doc = frame.contentDocument || frame.contentWindow.document;
+          if (!doc || !doc.body) return;
+          var h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight, 900);
+          frame.style.minHeight = h + 24 + "px";
+          frame.style.height = h + 24 + "px";
+        } catch (e) {}
+      }
+
+      document.getElementById("listSubj").textContent = SUBJECT;
+      document.getElementById("openSubj").textContent = SUBJECT;
+      btnLight.addEventListener("click", function () { applyTheme("light"); });
+      btnDark.addEventListener("click", function () { applyTheme("dark"); });
+      frame.addEventListener("load", fitFrame);
+
+      async function loadCount() {
+        try {
+          var res = await fetch("/api/petition-count", { cache: "no-store" });
+          if (!res.ok) throw new Error("api");
+          var data = await res.json();
+          var total = data.total != null ? data.total : data.displayed;
+          if (total == null) throw new Error("empty");
+          setPre(
+            Number(total).toLocaleString("en-US") +
+              " Rams have signed for Darren. Parent, alum, friend — if you stand with him, you’re a Ram."
+          );
+        } catch (e) {
+          setPre(FALLBACK_PRE);
+        }
+      }
+      loadCount();
+      applyTheme("light");
+    })();
+  </script>
+</body>
+</html>

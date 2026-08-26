@@ -14,3 +14,8 @@ img/hero-mobile.png
 img/hero-square.png
 img/uwd-logo-ref.png
 img/ram-fight-back-logo-ai.png
+
+# Secrets
+.env
+.env.*
+!.env.example
