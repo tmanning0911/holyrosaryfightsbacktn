@@ -8,6 +8,7 @@ const ROOT = path.join(__dirname, "../..");
 const MAX_CHARS = 3200;
 const DEFAULT_MODEL = "eleven_v3";
 const DEFAULT_VOICE = "EXAVITQu4vr4xnSDxMaL"; // Sarah — mature, reassuring, confident
+const DEFAULT_VOICE_NAME = "Sarah";
 const OUTPUT_FORMAT = "mp3_44100_128";
 
 function loadEnv() {
@@ -41,6 +42,7 @@ function getConfig() {
   return {
     enabled: isEnabled(),
     voiceId: process.env.ELEVENLABS_VOICE_ID || DEFAULT_VOICE,
+    voiceName: process.env.ELEVENLABS_VOICE_NAME || DEFAULT_VOICE_NAME,
     modelId: process.env.ELEVENLABS_MODEL_ID || DEFAULT_MODEL,
   };
 }

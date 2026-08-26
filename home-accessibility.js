@@ -1,12 +1,7 @@
 /**
- * Single mission narrator (ElevenLabs via /api/tts). Local preview unless deployed with keys.
+ * Mission narrator (ElevenLabs via /api/tts).
  */
 (function () {
-  const LOCAL =
-    location.hostname === "127.0.0.1" ||
-    location.hostname === "localhost" ||
-    location.hostname === "[::1]";
-
   const btn = document.getElementById("missionListen");
   const labelEl = btn?.querySelector(".mission-listen-label");
 
@@ -273,7 +268,7 @@
       await playNextChunk();
     } catch (err) {
       stopPlayback();
-      showError(err?.message?.includes("Failed to fetch") ? "Audio offline — run serve.py" : "Audio unavailable");
+      showError(err?.message?.includes("Failed to fetch") ? "Audio unavailable — try again" : "Audio unavailable");
     }
   }
 
@@ -312,31 +307,28 @@
       await playNextChunk();
     } catch (err) {
       stopPlayback();
-      showError(err?.message?.includes("Failed to fetch") ? "Audio offline — run serve.py" : "Audio unavailable");
+      showError(err?.message?.includes("Failed to fetch") ? "Audio unavailable — try again" : "Audio unavailable");
     }
   }
 
   btn.addEventListener("click", startPlayback);
 
   async function init() {
-    if (!LOCAL) {
-      btn.hidden = true;
-      return;
-    }
-    btn.hidden = false;
     try {
       const res = await fetch("/api/tts", { cache: "no-store" });
       if (!res.ok) throw new Error("tts_status_failed");
       const cfg = await res.json();
       if (!cfg.enabled) {
-        btn.disabled = true;
-        setLabel("Audio not configured");
+        btn.hidden = true;
         return;
       }
+      btn.hidden = false;
       ttsVoiceName = cfg.voiceName || "Sarah";
       setLabel(`Listen (${ttsVoiceName})`);
     } catch (_) {
-      setLabel("Listen to our mission");
+      btn.hidden = true;
     }
   }
+
+  init();
 })();

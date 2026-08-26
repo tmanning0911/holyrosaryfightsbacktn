@@ -35,6 +35,9 @@ exports.handler = async function (event) {
       ok: true,
       enabled: cfg.enabled,
       voiceConfigured: Boolean(cfg.voiceId),
+      voiceId: cfg.voiceId,
+      voiceName: cfg.voiceName,
+      modelId: cfg.modelId,
       localPreview: process.env.ELEVENLABS_LOCAL_ONLY === "true",
     });
   }
